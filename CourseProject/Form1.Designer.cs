@@ -39,6 +39,8 @@
       this.addClientPage = new System.Windows.Forms.TabPage();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
+      this.passport = new System.Windows.Forms.TextBox();
+      this.passportLabel = new System.Windows.Forms.Label();
       this.tabPage.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.SuspendLayout();
@@ -110,11 +112,13 @@
       this.tabPage.Location = new System.Drawing.Point(12, 12);
       this.tabPage.Name = "tabPage";
       this.tabPage.SelectedIndex = 0;
-      this.tabPage.Size = new System.Drawing.Size(312, 243);
+      this.tabPage.Size = new System.Drawing.Size(445, 243);
       this.tabPage.TabIndex = 8;
       // 
       // addClientPage
       // 
+      this.addClientPage.Controls.Add(this.passportLabel);
+      this.addClientPage.Controls.Add(this.passport);
       this.addClientPage.Controls.Add(this.city);
       this.addClientPage.Controls.Add(this.button1);
       this.addClientPage.Controls.Add(this.label3);
@@ -125,17 +129,18 @@
       this.addClientPage.Location = new System.Drawing.Point(4, 22);
       this.addClientPage.Name = "addClientPage";
       this.addClientPage.Padding = new System.Windows.Forms.Padding(3);
-      this.addClientPage.Size = new System.Drawing.Size(304, 217);
+      this.addClientPage.Size = new System.Drawing.Size(437, 217);
       this.addClientPage.TabIndex = 0;
       this.addClientPage.Text = "tabPage1";
       this.addClientPage.UseVisualStyleBackColor = true;
+      this.addClientPage.Click += new System.EventHandler(this.addClientPage_Click);
       // 
       // tabPage2
       // 
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(304, 217);
+      this.tabPage2.Size = new System.Drawing.Size(437, 217);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "tabPage2";
       this.tabPage2.UseVisualStyleBackColor = true;
@@ -146,11 +151,28 @@
       this.dbConnection.FireInfoMessageEventOnUserErrors = false;
       this.dbConnection.InfoMessage += new System.Data.SqlClient.SqlInfoMessageEventHandler(this.sqlConnection1_InfoMessage);
       // 
+      // passport
+      // 
+      this.passport.Location = new System.Drawing.Point(288, 23);
+      this.passport.Name = "passport";
+      this.passport.Size = new System.Drawing.Size(142, 20);
+      this.passport.TabIndex = 8;
+      // 
+      // passportLabel
+      // 
+      this.passportLabel.AutoSize = true;
+      this.passportLabel.Location = new System.Drawing.Point(235, 23);
+      this.passportLabel.Name = "passportLabel";
+      this.passportLabel.Size = new System.Drawing.Size(47, 13);
+      this.passportLabel.TabIndex = 9;
+      this.passportLabel.Text = "passport";
+      this.passportLabel.Click += new System.EventHandler(this.label4_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(342, 367);
+      this.ClientSize = new System.Drawing.Size(485, 347);
       this.Controls.Add(this.tabPage);
       this.Name = "Form1";
       this.Text = "Form1";
@@ -175,6 +197,8 @@
     private System.Windows.Forms.TabPage addClientPage;
     private System.Windows.Forms.TabPage tabPage2;
     private System.Data.SqlClient.SqlConnection dbConnection;
+    private System.Windows.Forms.Label passportLabel;
+    private System.Windows.Forms.TextBox passport;
   }
 }
 
