@@ -48,6 +48,7 @@ namespace CourseProject
       insertClientCmd.Parameters.Add("@ClientCityId", SqlDbType.Int).Value = city.SelectedValue;
       insertClientCmd.Parameters.Add("@ClientAddress", SqlDbType.NChar).Value = address.Text;
       insertClientCmd.Parameters.Add("@PassportNumber", SqlDbType.NChar).Value = passport.Text;
+      insertClientCmd.Parameters.Add("@PhoneNumber", SqlDbType.VarChar).Value = phoneTextBox.Text;
 
       try
       {
@@ -70,6 +71,21 @@ namespace CourseProject
     }
 
     private void addClientPage_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tabPage2_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void textBox1_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
     {
 
     }

@@ -37,12 +37,18 @@
       this.city = new System.Windows.Forms.ComboBox();
       this.tabPage = new System.Windows.Forms.TabControl();
       this.addClientPage = new System.Windows.Forms.TabPage();
+      this.passportLabel = new System.Windows.Forms.Label();
+      this.passport = new System.Windows.Forms.TextBox();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
-      this.passport = new System.Windows.Forms.TextBox();
-      this.passportLabel = new System.Windows.Forms.Label();
+      this.openAccountPassportLabel = new System.Windows.Forms.Label();
+      this.openAccountPassport = new System.Windows.Forms.TextBox();
+      this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+      this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
+      this.label4 = new System.Windows.Forms.Label();
       this.tabPage.SuspendLayout();
       this.addClientPage.SuspendLayout();
+      this.tabPage2.SuspendLayout();
       this.SuspendLayout();
       // 
       // name
@@ -117,6 +123,8 @@
       // 
       // addClientPage
       // 
+      this.addClientPage.Controls.Add(this.label4);
+      this.addClientPage.Controls.Add(this.phoneTextBox);
       this.addClientPage.Controls.Add(this.passportLabel);
       this.addClientPage.Controls.Add(this.passport);
       this.addClientPage.Controls.Add(this.city);
@@ -131,32 +139,9 @@
       this.addClientPage.Padding = new System.Windows.Forms.Padding(3);
       this.addClientPage.Size = new System.Drawing.Size(437, 217);
       this.addClientPage.TabIndex = 0;
-      this.addClientPage.Text = "tabPage1";
+      this.addClientPage.Text = "add client";
       this.addClientPage.UseVisualStyleBackColor = true;
       this.addClientPage.Click += new System.EventHandler(this.addClientPage_Click);
-      // 
-      // tabPage2
-      // 
-      this.tabPage2.Location = new System.Drawing.Point(4, 22);
-      this.tabPage2.Name = "tabPage2";
-      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(437, 217);
-      this.tabPage2.TabIndex = 1;
-      this.tabPage2.Text = "tabPage2";
-      this.tabPage2.UseVisualStyleBackColor = true;
-      // 
-      // dbConnection
-      // 
-      this.dbConnection.ConnectionString = "Integrated Security=SSPI;Initial Catalog=CourseProject;Data Source=ASUSN551JM;";
-      this.dbConnection.FireInfoMessageEventOnUserErrors = false;
-      this.dbConnection.InfoMessage += new System.Data.SqlClient.SqlInfoMessageEventHandler(this.sqlConnection1_InfoMessage);
-      // 
-      // passport
-      // 
-      this.passport.Location = new System.Drawing.Point(288, 23);
-      this.passport.Name = "passport";
-      this.passport.Size = new System.Drawing.Size(142, 20);
-      this.passport.TabIndex = 8;
       // 
       // passportLabel
       // 
@@ -167,6 +152,75 @@
       this.passportLabel.TabIndex = 9;
       this.passportLabel.Text = "passport";
       this.passportLabel.Click += new System.EventHandler(this.label4_Click);
+      // 
+      // passport
+      // 
+      this.passport.Location = new System.Drawing.Point(288, 23);
+      this.passport.Name = "passport";
+      this.passport.Size = new System.Drawing.Size(142, 20);
+      this.passport.TabIndex = 8;
+      // 
+      // tabPage2
+      // 
+      this.tabPage2.Controls.Add(this.maskedTextBox1);
+      this.tabPage2.Controls.Add(this.openAccountPassport);
+      this.tabPage2.Controls.Add(this.openAccountPassportLabel);
+      this.tabPage2.Location = new System.Drawing.Point(4, 22);
+      this.tabPage2.Name = "tabPage2";
+      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage2.Size = new System.Drawing.Size(437, 217);
+      this.tabPage2.TabIndex = 1;
+      this.tabPage2.Text = "open account";
+      this.tabPage2.UseVisualStyleBackColor = true;
+      this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+      // 
+      // dbConnection
+      // 
+      this.dbConnection.ConnectionString = "Integrated Security=SSPI;Initial Catalog=CourseProject;Data Source=ASUSN551JM;";
+      this.dbConnection.FireInfoMessageEventOnUserErrors = false;
+      this.dbConnection.InfoMessage += new System.Data.SqlClient.SqlInfoMessageEventHandler(this.sqlConnection1_InfoMessage);
+      // 
+      // openAccountPassportLabel
+      // 
+      this.openAccountPassportLabel.AutoSize = true;
+      this.openAccountPassportLabel.Location = new System.Drawing.Point(18, 23);
+      this.openAccountPassportLabel.Name = "openAccountPassportLabel";
+      this.openAccountPassportLabel.Size = new System.Drawing.Size(47, 13);
+      this.openAccountPassportLabel.TabIndex = 0;
+      this.openAccountPassportLabel.Text = "passport";
+      // 
+      // openAccountPassport
+      // 
+      this.openAccountPassport.Location = new System.Drawing.Point(71, 23);
+      this.openAccountPassport.Name = "openAccountPassport";
+      this.openAccountPassport.Size = new System.Drawing.Size(100, 20);
+      this.openAccountPassport.TabIndex = 1;
+      this.openAccountPassport.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+      // 
+      // maskedTextBox1
+      // 
+      this.maskedTextBox1.Location = new System.Drawing.Point(71, 62);
+      this.maskedTextBox1.Name = "maskedTextBox1";
+      this.maskedTextBox1.Size = new System.Drawing.Size(100, 20);
+      this.maskedTextBox1.TabIndex = 2;
+      this.maskedTextBox1.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox1_MaskInputRejected);
+      // 
+      // phoneTextBox
+      // 
+      this.phoneTextBox.Location = new System.Drawing.Point(288, 62);
+      this.phoneTextBox.Mask = "(999) 000-0000";
+      this.phoneTextBox.Name = "phoneTextBox";
+      this.phoneTextBox.Size = new System.Drawing.Size(84, 20);
+      this.phoneTextBox.TabIndex = 10;
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(238, 69);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(37, 13);
+      this.label4.TabIndex = 11;
+      this.label4.Text = "phone";
       // 
       // Form1
       // 
@@ -180,6 +234,8 @@
       this.tabPage.ResumeLayout(false);
       this.addClientPage.ResumeLayout(false);
       this.addClientPage.PerformLayout();
+      this.tabPage2.ResumeLayout(false);
+      this.tabPage2.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -199,6 +255,11 @@
     private System.Data.SqlClient.SqlConnection dbConnection;
     private System.Windows.Forms.Label passportLabel;
     private System.Windows.Forms.TextBox passport;
+    private System.Windows.Forms.TextBox openAccountPassport;
+    private System.Windows.Forms.Label openAccountPassportLabel;
+    private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.MaskedTextBox phoneTextBox;
   }
 }
 
