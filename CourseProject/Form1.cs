@@ -89,5 +89,39 @@ namespace CourseProject
     {
 
     }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+      if (checkIfClientExists(openAccountPassport.Text))
+      {
+        SqlCommand openAccountCmd = new SqlCommand("InsertBankAccountUsingPassport", dbConnection);
+        openAccountCmd.CommandType = CommandType.StoredProcedure;
+        openAccountCmd.Parameters.Add("@PassportNumber", SqlDbType.NChar).Value = openAccountPassport.Text;
+
+        string percentage = maskedTextBox1.Text.Trim('%');
+        decimal fraction = Convert.ToDecimal(percentage) / 100;
+        openAccountCmd.Parameters.Add("@Interest", SqlDbType.Decimal).Value = fraction;
+
+        try
+        {
+          openAccountCmd.ExecuteNonQuery();
+        }
+        catch (SqlException exc)
+        {
+          MessageBox.Show(exc.ToString());
+        }
+      }
+      
+    }
+
+    private bool checkIfClientExists(string passportNumber)
+    {
+      SqlCommand checkClientCmd = new SqlCommand("SelectClientsWithPassport", dbConnection);
+      checkClientCmd.CommandType = CommandType.StoredProcedure;
+      checkClientCmd.Parameters.Add("@PassportNumber", SqlDbType.NChar).Value = passportNumber;
+
+      int clientCount = (int)checkClientCmd.ExecuteScalar();
+      return (clientCount > 0);
+    }
   }
 }
