@@ -38,7 +38,6 @@
       this.tabPage = new System.Windows.Forms.TabControl();
       this.addClientPage = new System.Windows.Forms.TabPage();
       this.passportLabel = new System.Windows.Forms.Label();
-      this.passport = new System.Windows.Forms.TextBox();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
       this.openAccountPassportLabel = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
       this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
       this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
       this.label4 = new System.Windows.Forms.Label();
+      this.passport = new System.Windows.Forms.MaskedTextBox();
       this.tabPage.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.tabPage2.SuspendLayout();
@@ -123,10 +123,10 @@
       // 
       // addClientPage
       // 
+      this.addClientPage.Controls.Add(this.passport);
       this.addClientPage.Controls.Add(this.label4);
       this.addClientPage.Controls.Add(this.phoneTextBox);
       this.addClientPage.Controls.Add(this.passportLabel);
-      this.addClientPage.Controls.Add(this.passport);
       this.addClientPage.Controls.Add(this.city);
       this.addClientPage.Controls.Add(this.button1);
       this.addClientPage.Controls.Add(this.label3);
@@ -152,13 +152,6 @@
       this.passportLabel.TabIndex = 9;
       this.passportLabel.Text = "passport";
       this.passportLabel.Click += new System.EventHandler(this.label4_Click);
-      // 
-      // passport
-      // 
-      this.passport.Location = new System.Drawing.Point(288, 23);
-      this.passport.Name = "passport";
-      this.passport.Size = new System.Drawing.Size(142, 20);
-      this.passport.TabIndex = 8;
       // 
       // tabPage2
       // 
@@ -222,6 +215,14 @@
       this.label4.TabIndex = 11;
       this.label4.Text = "phone";
       // 
+      // passport
+      // 
+      this.passport.Location = new System.Drawing.Point(289, 22);
+      this.passport.Mask = "00 00 000000";
+      this.passport.Name = "passport";
+      this.passport.Size = new System.Drawing.Size(83, 20);
+      this.passport.TabIndex = 12;
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,12 +255,12 @@
     private System.Windows.Forms.TabPage tabPage2;
     private System.Data.SqlClient.SqlConnection dbConnection;
     private System.Windows.Forms.Label passportLabel;
-    private System.Windows.Forms.TextBox passport;
     private System.Windows.Forms.TextBox openAccountPassport;
     private System.Windows.Forms.Label openAccountPassportLabel;
     private System.Windows.Forms.MaskedTextBox maskedTextBox1;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.MaskedTextBox phoneTextBox;
+    private System.Windows.Forms.MaskedTextBox passport;
   }
 }
 
