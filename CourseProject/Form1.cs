@@ -19,8 +19,6 @@ namespace CourseProject
       InitializeComponent();
       //dbConnection.ConnectionString = "Integrated Security = false; Initial Catalog = CourseProject; Data Source = ASUSN551JM; User Id=bob; Password=bob";
       Program.connectionQuery.connectionString = "Integrated Security = true; Initial Catalog = CourseProject; Data Source = ASUSN551JM;";
-      //dbConnection.ConnectionString = "Integrated Security = true; Initial Catalog = CourseProject; Data Source = ASUSN551JM;";
-      //dbConnection.Open();
 
       Program.connectionQuery.OpenConnection();
       String strSQL = "SELECT city_id, name FROM Cities";

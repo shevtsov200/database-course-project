@@ -33,7 +33,6 @@
       this.label1 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
       this.logInButton = new System.Windows.Forms.Button();
-      this.dbConnection = new System.Data.SqlClient.SqlConnection();
       this.SuspendLayout();
       // 
       // usernameTextBox
@@ -80,10 +79,6 @@
       this.logInButton.UseVisualStyleBackColor = true;
       this.logInButton.Click += new System.EventHandler(this.logInButton_Click);
       // 
-      // dbConnection
-      // 
-      this.dbConnection.FireInfoMessageEventOnUserErrors = false;
-      // 
       // LoginForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,7 +103,6 @@
     private System.Windows.Forms.TextBox passwordTextBox;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;
-    private System.Data.SqlClient.SqlConnection dbConnection;
     private System.Windows.Forms.Button logInButton;
   }
 }
