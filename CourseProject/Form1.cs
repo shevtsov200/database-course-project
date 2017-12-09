@@ -17,17 +17,18 @@ namespace CourseProject
     public Form1()
     {
       InitializeComponent();
+      //dbConnection.ConnectionString = "Integrated Security = false; Initial Catalog = CourseProject; Data Source = ASUSN551JM; User Id=bob; Password=bob";
+      Program.connectionQuery.connectionString = "Integrated Security = true; Initial Catalog = CourseProject; Data Source = ASUSN551JM;";
+      //dbConnection.ConnectionString = "Integrated Security = true; Initial Catalog = CourseProject; Data Source = ASUSN551JM;";
+      //dbConnection.Open();
 
-      dbConnection.Open();
-
+      Program.connectionQuery.OpenConnection();
       String strSQL = "SELECT city_id, name FROM Cities";
-      SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand(strSQL, dbConnection));
 
-      DataSet ds = new DataSet();
-      adapter.Fill(ds);
-      city.DataSource = ds.Tables[0];
+      city.DataSource = Program.connectionQuery.DataSet(strSQL);
       city.DisplayMember = "name";
       city.ValueMember = "city_id";
+      Program.connectionQuery.CloseConnection();
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -40,24 +41,23 @@ namespace CourseProject
 
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    private void addClientButton_Click(object sender, EventArgs e)
     {
-      SqlCommand insertClientCmd = new SqlCommand("InsertClient", dbConnection);
-      insertClientCmd.CommandType = CommandType.StoredProcedure;
-      insertClientCmd.Parameters.Add("@ClientName", SqlDbType.NChar).Value = name.Text;
-      insertClientCmd.Parameters.Add("@ClientCityId", SqlDbType.Int).Value = city.SelectedValue;
-      insertClientCmd.Parameters.Add("@ClientAddress", SqlDbType.NChar).Value = address.Text;
-      insertClientCmd.Parameters.Add("@PassportNumber", SqlDbType.NChar).Value = passport.Text;
-      insertClientCmd.Parameters.Add("@PhoneNumber", SqlDbType.VarChar).Value = phoneTextBox.Text;
+      Program.connectionQuery.OpenConnection();
 
-      try
+      SqlParameter[] parameterList = 
       {
-        insertClientCmd.ExecuteNonQuery();
-      }
-      catch (SqlException exc)
-      {
-        MessageBox.Show(exc.ToString());
-      }
+        new SqlParameter() {ParameterName =  "@ClientName", SqlDbType = SqlDbType.NVarChar, Value = name.Text},
+        new SqlParameter() {ParameterName =  "@ClientCityId", SqlDbType = SqlDbType.Int, Value = city.SelectedValue},
+        new SqlParameter() {ParameterName =  "@ClientAddress", SqlDbType = SqlDbType.NVarChar, Value = address.Text},
+        new SqlParameter() {ParameterName =  "@PassportNumber", SqlDbType = SqlDbType.NVarChar, Value = passport.Text},
+        new SqlParameter() {ParameterName =  "@PhoneNumber", SqlDbType = SqlDbType.VarChar, Value = phoneTextBox.Text},
+        new SqlParameter() {ParameterName =  "@UserName", SqlDbType = SqlDbType.VarChar, Value = userNameTextBox.Text},
+        new SqlParameter() {ParameterName =  "@Password", SqlDbType = SqlDbType.VarChar, Value = passwordTextBox.Text}
+      };
+      Program.connectionQuery.ExecuteNonQuery("InsertClient", CommandType.StoredProcedure, parameterList);
+
+      Program.connectionQuery.CloseConnection();
     }
 
     private void sqlConnection1_InfoMessage(object sender, SqlInfoMessageEventArgs e)
@@ -96,7 +96,7 @@ namespace CourseProject
       {
         SqlCommand openAccountCmd = new SqlCommand("InsertBankAccountUsingPassport", dbConnection);
         openAccountCmd.CommandType = CommandType.StoredProcedure;
-        openAccountCmd.Parameters.Add("@PassportNumber", SqlDbType.NChar).Value = openAccountPassport.Text;
+        openAccountCmd.Parameters.Add("@PassportNumber", SqlDbType.NVarChar).Value = openAccountPassport.Text;
 
         string percentage = maskedTextBox1.Text.Trim('%');
         decimal fraction = Convert.ToDecimal(percentage) / 100;
@@ -118,10 +118,15 @@ namespace CourseProject
     {
       SqlCommand checkClientCmd = new SqlCommand("SelectClientsWithPassport", dbConnection);
       checkClientCmd.CommandType = CommandType.StoredProcedure;
-      checkClientCmd.Parameters.Add("@PassportNumber", SqlDbType.NChar).Value = passportNumber;
+      checkClientCmd.Parameters.Add("@PassportNumber", SqlDbType.NVarChar).Value = passportNumber;
 
       int clientCount = (int)checkClientCmd.ExecuteScalar();
       return (clientCount > 0);
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }
