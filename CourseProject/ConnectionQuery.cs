@@ -30,7 +30,26 @@ namespace CourseProject
       cmd.ExecuteNonQuery();
     }
 
-    public object ExecuteNonQuery(string commandText, CommandType commandType, 
+    public object ExecuteNonQueryWithOutput(string commandText, CommandType commandType,
+      string outputParameterName, params SqlParameter[] commandParameters)
+    {
+      SqlCommand cmd = new SqlCommand(commandText, dbConnection);
+      cmd.CommandType = commandType;
+      cmd.Parameters.AddRange(commandParameters);
+
+      try
+      {
+        cmd.ExecuteNonQuery();
+        return cmd.Parameters[outputParameterName].Value;
+      }
+      catch (SqlException exc)
+      {
+        Console.WriteLine(exc.ToString());
+      }
+      return null;
+    }
+
+    public void ExecuteNonQuery(string commandText, CommandType commandType, 
       params SqlParameter[] commandParameters)
     {
       SqlCommand cmd = new SqlCommand(commandText, dbConnection);
@@ -40,14 +59,11 @@ namespace CourseProject
       try
       {
         cmd.ExecuteNonQuery();
-
-        return cmd.Parameters["@ReturnValue"].Value;
       }
       catch (SqlException exc)
       {
         Console.WriteLine(exc.ToString());
       }
-      return null;
     }
 
     public SqlDataReader DataReader(string query)

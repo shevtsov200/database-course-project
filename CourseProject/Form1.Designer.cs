@@ -54,16 +54,16 @@
       this.showAccounts = new System.Windows.Forms.TabPage();
       this.accountsGrid = new System.Windows.Forms.DataGridView();
       this.makeTransactionPage = new System.Windows.Forms.TabPage();
-      this.button3 = new System.Windows.Forms.Button();
-      this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
-      this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
-      this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
+      this.transferFundsButton = new System.Windows.Forms.Button();
+      this.amountTextBox = new System.Windows.Forms.MaskedTextBox();
       this.label8 = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
       this.label11 = new System.Windows.Forms.Label();
       this.usernameLabel = new System.Windows.Forms.Label();
+      this.destinationAccountTextBox = new System.Windows.Forms.MaskedTextBox();
+      this.sourceAccountComboBox = new System.Windows.Forms.MaskedTextBox();
       this.pageControl.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.tabPage2.SuspendLayout();
@@ -324,10 +324,10 @@
       // 
       // makeTransactionPage
       // 
-      this.makeTransactionPage.Controls.Add(this.button3);
-      this.makeTransactionPage.Controls.Add(this.maskedTextBox4);
-      this.makeTransactionPage.Controls.Add(this.maskedTextBox3);
-      this.makeTransactionPage.Controls.Add(this.maskedTextBox2);
+      this.makeTransactionPage.Controls.Add(this.sourceAccountComboBox);
+      this.makeTransactionPage.Controls.Add(this.destinationAccountTextBox);
+      this.makeTransactionPage.Controls.Add(this.transferFundsButton);
+      this.makeTransactionPage.Controls.Add(this.amountTextBox);
       this.makeTransactionPage.Controls.Add(this.label8);
       this.makeTransactionPage.Controls.Add(this.label7);
       this.makeTransactionPage.Controls.Add(this.label6);
@@ -338,44 +338,28 @@
       this.makeTransactionPage.Text = "make transaction";
       this.makeTransactionPage.UseVisualStyleBackColor = true;
       // 
-      // button3
+      // transferFundsButton
       // 
-      this.button3.Location = new System.Drawing.Point(29, 119);
-      this.button3.Name = "button3";
-      this.button3.Size = new System.Drawing.Size(75, 45);
-      this.button3.TabIndex = 8;
-      this.button3.Text = "transfer funds";
-      this.button3.UseVisualStyleBackColor = true;
-      this.button3.Click += new System.EventHandler(this.button3_Click);
+      this.transferFundsButton.Location = new System.Drawing.Point(29, 119);
+      this.transferFundsButton.Name = "transferFundsButton";
+      this.transferFundsButton.Size = new System.Drawing.Size(75, 45);
+      this.transferFundsButton.TabIndex = 8;
+      this.transferFundsButton.Text = "transfer funds";
+      this.transferFundsButton.UseVisualStyleBackColor = true;
+      this.transferFundsButton.Click += new System.EventHandler(this.transferFundsButton_Click);
       // 
-      // maskedTextBox4
+      // amountTextBox
       // 
-      this.maskedTextBox4.Location = new System.Drawing.Point(154, 25);
-      this.maskedTextBox4.Mask = "0000 0000 0000 0000";
-      this.maskedTextBox4.Name = "maskedTextBox4";
-      this.maskedTextBox4.Size = new System.Drawing.Size(113, 20);
-      this.maskedTextBox4.TabIndex = 7;
-      // 
-      // maskedTextBox3
-      // 
-      this.maskedTextBox3.Location = new System.Drawing.Point(29, 25);
-      this.maskedTextBox3.Mask = "0000 0000 0000 0000";
-      this.maskedTextBox3.Name = "maskedTextBox3";
-      this.maskedTextBox3.Size = new System.Drawing.Size(119, 20);
-      this.maskedTextBox3.TabIndex = 6;
-      // 
-      // maskedTextBox2
-      // 
-      this.maskedTextBox2.Location = new System.Drawing.Point(273, 26);
-      this.maskedTextBox2.Mask = "0000000000";
-      this.maskedTextBox2.Name = "maskedTextBox2";
-      this.maskedTextBox2.Size = new System.Drawing.Size(67, 20);
-      this.maskedTextBox2.TabIndex = 5;
+      this.amountTextBox.Location = new System.Drawing.Point(291, 24);
+      this.amountTextBox.Mask = "0000000000";
+      this.amountTextBox.Name = "amountTextBox";
+      this.amountTextBox.Size = new System.Drawing.Size(67, 20);
+      this.amountTextBox.TabIndex = 5;
       // 
       // label8
       // 
       this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(270, 9);
+      this.label8.Location = new System.Drawing.Point(288, 10);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(42, 13);
       this.label8.TabIndex = 4;
@@ -384,7 +368,7 @@
       // label7
       // 
       this.label7.AutoSize = true;
-      this.label7.Location = new System.Drawing.Point(151, 9);
+      this.label7.Location = new System.Drawing.Point(166, 10);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(100, 13);
       this.label7.TabIndex = 3;
@@ -425,6 +409,25 @@
       this.usernameLabel.TabIndex = 10;
       this.usernameLabel.Text = "usernameLabel";
       this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
+      // 
+      // destinationAccountTextBox
+      // 
+      this.destinationAccountTextBox.Location = new System.Drawing.Point(169, 24);
+      this.destinationAccountTextBox.Mask = "0000 0000 0000 0000";
+      this.destinationAccountTextBox.Name = "destinationAccountTextBox";
+      this.destinationAccountTextBox.PromptChar = '0';
+      this.destinationAccountTextBox.Size = new System.Drawing.Size(116, 20);
+      this.destinationAccountTextBox.TabIndex = 10;
+      // 
+      // sourceAccountComboBox
+      // 
+      this.sourceAccountComboBox.Culture = new System.Globalization.CultureInfo("rwk-TZ");
+      this.sourceAccountComboBox.Location = new System.Drawing.Point(29, 24);
+      this.sourceAccountComboBox.Mask = "0000 0000 0000 0000";
+      this.sourceAccountComboBox.Name = "sourceAccountComboBox";
+      this.sourceAccountComboBox.PromptChar = '0';
+      this.sourceAccountComboBox.Size = new System.Drawing.Size(123, 20);
+      this.sourceAccountComboBox.TabIndex = 11;
       // 
       // Form1
       // 
@@ -473,13 +476,11 @@
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.Button button2;
     private System.Windows.Forms.TabPage makeTransactionPage;
-    private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+    private System.Windows.Forms.MaskedTextBox amountTextBox;
     private System.Windows.Forms.Label label8;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.Button button3;
-    private System.Windows.Forms.MaskedTextBox maskedTextBox4;
-    private System.Windows.Forms.MaskedTextBox maskedTextBox3;
+    private System.Windows.Forms.Button transferFundsButton;
     private System.Windows.Forms.TextBox passwordTextBox;
     private System.Windows.Forms.TextBox userNameTextBox;
     private System.Windows.Forms.Label label10;
@@ -489,6 +490,8 @@
     private System.Windows.Forms.DataGridView accountsGrid;
     private System.Windows.Forms.Label label11;
     private System.Windows.Forms.Label usernameLabel;
+    private System.Windows.Forms.MaskedTextBox sourceAccountComboBox;
+    private System.Windows.Forms.MaskedTextBox destinationAccountTextBox;
   }
 }
 

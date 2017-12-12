@@ -34,7 +34,7 @@ namespace CourseProject
          new SqlParameter() { ParameterName = "@UserName", SqlDbType = SqlDbType.VarChar, Value = usernameTextBox.Text },
          new SqlParameter() { ParameterName = "@ReturnValue", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output, Size = 256}
       };
-      string role = Program.connectionQuery.ExecuteNonQuery("SelectUserRole", CommandType.StoredProcedure, parameterList) as string;
+      string role = Program.connectionQuery.ExecuteNonQueryWithOutput("SelectUserRole", CommandType.StoredProcedure, "@ReturnValue", parameterList) as string;
       
       switch(role)
       {

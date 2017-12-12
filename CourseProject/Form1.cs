@@ -29,7 +29,7 @@ namespace CourseProject
       {
         new SqlParameter() { ParameterName = "@ReturnValue", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output, Size = 256}
       };
-      usernameLabel.Text = Program.connectionQuery.ExecuteNonQuery("SelectUserLogin", CommandType.StoredProcedure, parameterList) as string;
+      usernameLabel.Text = Program.connectionQuery.ExecuteNonQueryWithOutput("SelectUserLogin", CommandType.StoredProcedure, "@ReturnValue", parameterList) as string;
 
 
       Program.connectionQuery.CloseConnection();
@@ -144,9 +144,18 @@ namespace CourseProject
       return (clientCount > 0);
     }
 
-    private void button3_Click(object sender, EventArgs e)
+    private void transferFundsButton_Click(object sender, EventArgs e)
     {
+      SqlParameter[] parameterList =
+      {
+        new SqlParameter() {ParameterName =  "@sourceId", SqlDbType = SqlDbType.Int, Value = sourceAccountComboBox.Text},
+        new SqlParameter() {ParameterName =  "@destinationId", SqlDbType = SqlDbType.Int, Value = destinationAccountTextBox.Text},
+        new SqlParameter() {ParameterName =  "@amount", SqlDbType = SqlDbType.Decimal, Value = amountTextBox.Text}
+      };
 
+      Program.connectionQuery.OpenConnection();
+      Program.connectionQuery.ExecuteNonQuery("TransferFunds", CommandType.StoredProcedure, parameterList);
+      Program.connectionQuery.CloseConnection();
     }
 
     private void showAccounts_Click(object sender, EventArgs e)
@@ -155,6 +164,11 @@ namespace CourseProject
     }
 
     private void usernameLabel_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void maskedComboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
