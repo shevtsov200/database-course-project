@@ -17,16 +17,38 @@ namespace CourseProject
     public Form1()
     {
       InitializeComponent();
-      //dbConnection.ConnectionString = "Integrated Security = false; Initial Catalog = CourseProject; Data Source = ASUSN551JM; User Id=bob; Password=bob";
-      Program.connectionQuery.connectionString = "Integrated Security = true; Initial Catalog = CourseProject; Data Source = ASUSN551JM;";
-
+     
       Program.connectionQuery.OpenConnection();
       String strSQL = "SELECT city_id, name FROM Cities";
 
       city.DataSource = Program.connectionQuery.DataSet(strSQL);
       city.DisplayMember = "name";
       city.ValueMember = "city_id";
+
+      SqlParameter[] parameterList =
+      {
+        new SqlParameter() { ParameterName = "@ReturnValue", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output, Size = 256}
+      };
+      usernameLabel.Text = Program.connectionQuery.ExecuteNonQuery("SelectUserLogin", CommandType.StoredProcedure, parameterList) as string;
+
+
       Program.connectionQuery.CloseConnection();
+
+      pageControl.SelectedIndexChanged += new EventHandler(showAccounts_SelectedIndexChanged);
+
+      accountsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+    }
+
+    private void showAccounts_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      switch ((sender as TabControl).SelectedIndex)
+      {
+        case 2:
+          Program.connectionQuery.OpenConnection();
+          accountsGrid.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccounts");
+          Program.connectionQuery.CloseConnection();
+          break;
+      }
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -43,7 +65,7 @@ namespace CourseProject
     {
       Program.connectionQuery.OpenConnection();
 
-      SqlParameter[] parameterList = 
+      SqlParameter[] parameterList =
       {
         new SqlParameter() {ParameterName =  "@ClientName", SqlDbType = SqlDbType.NVarChar, Value = name.Text},
         new SqlParameter() {ParameterName =  "@ClientCityId", SqlDbType = SqlDbType.Int, Value = city.SelectedValue},
@@ -109,7 +131,7 @@ namespace CourseProject
           MessageBox.Show(exc.ToString());
         }
       }
-      
+
     }
 
     private bool checkIfClientExists(string passportNumber)
@@ -123,6 +145,16 @@ namespace CourseProject
     }
 
     private void button3_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void showAccounts_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void usernameLabel_Click(object sender, EventArgs e)
     {
 
     }

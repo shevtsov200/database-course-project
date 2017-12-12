@@ -51,6 +51,8 @@
       this.label5 = new System.Windows.Forms.Label();
       this.openAccountPassport = new System.Windows.Forms.MaskedTextBox();
       this.openAccountPassportLabel = new System.Windows.Forms.Label();
+      this.showAccounts = new System.Windows.Forms.TabPage();
+      this.accountsGrid = new System.Windows.Forms.DataGridView();
       this.makeTransactionPage = new System.Windows.Forms.TabPage();
       this.button3 = new System.Windows.Forms.Button();
       this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
@@ -60,9 +62,13 @@
       this.label7 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
+      this.label11 = new System.Windows.Forms.Label();
+      this.usernameLabel = new System.Windows.Forms.Label();
       this.pageControl.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.tabPage2.SuspendLayout();
+      this.showAccounts.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.accountsGrid)).BeginInit();
       this.makeTransactionPage.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -128,13 +134,17 @@
       // 
       // pageControl
       // 
+      this.pageControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.pageControl.Controls.Add(this.addClientPage);
       this.pageControl.Controls.Add(this.tabPage2);
+      this.pageControl.Controls.Add(this.showAccounts);
       this.pageControl.Controls.Add(this.makeTransactionPage);
       this.pageControl.Location = new System.Drawing.Point(12, 12);
       this.pageControl.Name = "pageControl";
       this.pageControl.SelectedIndex = 0;
-      this.pageControl.Size = new System.Drawing.Size(397, 304);
+      this.pageControl.Size = new System.Drawing.Size(461, 308);
       this.pageControl.TabIndex = 8;
       // 
       // addClientPage
@@ -157,7 +167,7 @@
       this.addClientPage.Location = new System.Drawing.Point(4, 22);
       this.addClientPage.Name = "addClientPage";
       this.addClientPage.Padding = new System.Windows.Forms.Padding(3);
-      this.addClientPage.Size = new System.Drawing.Size(389, 278);
+      this.addClientPage.Size = new System.Drawing.Size(453, 282);
       this.addClientPage.TabIndex = 0;
       this.addClientPage.Text = "add client";
       this.addClientPage.UseVisualStyleBackColor = true;
@@ -240,7 +250,7 @@
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(389, 278);
+      this.tabPage2.Size = new System.Drawing.Size(453, 282);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "open account";
       this.tabPage2.UseVisualStyleBackColor = true;
@@ -290,6 +300,28 @@
       this.openAccountPassportLabel.TabIndex = 0;
       this.openAccountPassportLabel.Text = "passport";
       // 
+      // showAccounts
+      // 
+      this.showAccounts.Controls.Add(this.accountsGrid);
+      this.showAccounts.Location = new System.Drawing.Point(4, 22);
+      this.showAccounts.Name = "showAccounts";
+      this.showAccounts.Size = new System.Drawing.Size(453, 282);
+      this.showAccounts.TabIndex = 3;
+      this.showAccounts.Text = "show accounts";
+      this.showAccounts.UseVisualStyleBackColor = true;
+      this.showAccounts.Click += new System.EventHandler(this.showAccounts_Click);
+      // 
+      // accountsGrid
+      // 
+      this.accountsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.accountsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.accountsGrid.Location = new System.Drawing.Point(14, 15);
+      this.accountsGrid.Name = "accountsGrid";
+      this.accountsGrid.Size = new System.Drawing.Size(423, 248);
+      this.accountsGrid.TabIndex = 0;
+      // 
       // makeTransactionPage
       // 
       this.makeTransactionPage.Controls.Add(this.button3);
@@ -301,7 +333,7 @@
       this.makeTransactionPage.Controls.Add(this.label6);
       this.makeTransactionPage.Location = new System.Drawing.Point(4, 22);
       this.makeTransactionPage.Name = "makeTransactionPage";
-      this.makeTransactionPage.Size = new System.Drawing.Size(389, 278);
+      this.makeTransactionPage.Size = new System.Drawing.Size(453, 282);
       this.makeTransactionPage.TabIndex = 2;
       this.makeTransactionPage.Text = "make transaction";
       this.makeTransactionPage.UseVisualStyleBackColor = true;
@@ -371,11 +403,36 @@
       // 
       this.dbConnection.FireInfoMessageEventOnUserErrors = false;
       // 
+      // label11
+      // 
+      this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(16, 323);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(66, 13);
+      this.label11.TabIndex = 9;
+      this.label11.Text = "current user:";
+      // 
+      // usernameLabel
+      // 
+      this.usernameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.usernameLabel.AutoSize = true;
+      this.usernameLabel.Location = new System.Drawing.Point(89, 323);
+      this.usernameLabel.Name = "usernameLabel";
+      this.usernameLabel.Size = new System.Drawing.Size(79, 13);
+      this.usernameLabel.TabIndex = 10;
+      this.usernameLabel.Text = "usernameLabel";
+      this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(485, 347);
+      this.Controls.Add(this.usernameLabel);
+      this.Controls.Add(this.label11);
       this.Controls.Add(this.pageControl);
       this.Name = "Form1";
       this.Text = "Form1";
@@ -385,9 +442,12 @@
       this.addClientPage.PerformLayout();
       this.tabPage2.ResumeLayout(false);
       this.tabPage2.PerformLayout();
+      this.showAccounts.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.accountsGrid)).EndInit();
       this.makeTransactionPage.ResumeLayout(false);
       this.makeTransactionPage.PerformLayout();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -425,6 +485,10 @@
     private System.Windows.Forms.Label label10;
     private System.Windows.Forms.Label label9;
     private System.Data.SqlClient.SqlConnection dbConnection;
+    private System.Windows.Forms.TabPage showAccounts;
+    private System.Windows.Forms.DataGridView accountsGrid;
+    private System.Windows.Forms.Label label11;
+    private System.Windows.Forms.Label usernameLabel;
   }
 }
 
