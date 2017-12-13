@@ -48,6 +48,12 @@ namespace CourseProject
           accountsGrid.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccounts");
           Program.connectionQuery.CloseConnection();
           break;
+        case 3:
+          Program.connectionQuery.OpenConnection();
+          sourceAccountComboBox.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccountsNumbers");
+          sourceAccountComboBox.ValueMember = "account_id";
+          Program.connectionQuery.CloseConnection();
+          break;
       }
     }
 

@@ -63,7 +63,7 @@
       this.label11 = new System.Windows.Forms.Label();
       this.usernameLabel = new System.Windows.Forms.Label();
       this.destinationAccountTextBox = new System.Windows.Forms.MaskedTextBox();
-      this.sourceAccountComboBox = new System.Windows.Forms.MaskedTextBox();
+      this.sourceAccountComboBox = new System.Windows.Forms.ComboBox();
       this.pageControl.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.tabPage2.SuspendLayout();
@@ -350,7 +350,7 @@
       // 
       // amountTextBox
       // 
-      this.amountTextBox.Location = new System.Drawing.Point(291, 24);
+      this.amountTextBox.Location = new System.Drawing.Point(348, 23);
       this.amountTextBox.Mask = "0000000000";
       this.amountTextBox.Name = "amountTextBox";
       this.amountTextBox.Size = new System.Drawing.Size(67, 20);
@@ -359,7 +359,7 @@
       // label8
       // 
       this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(288, 10);
+      this.label8.Location = new System.Drawing.Point(345, 7);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(42, 13);
       this.label8.TabIndex = 4;
@@ -368,7 +368,7 @@
       // label7
       // 
       this.label7.AutoSize = true;
-      this.label7.Location = new System.Drawing.Point(166, 10);
+      this.label7.Location = new System.Drawing.Point(208, 7);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(100, 13);
       this.label7.TabIndex = 3;
@@ -377,7 +377,7 @@
       // label6
       // 
       this.label6.AutoSize = true;
-      this.label6.Location = new System.Drawing.Point(26, 10);
+      this.label6.Location = new System.Drawing.Point(26, 6);
       this.label6.Name = "label6";
       this.label6.Size = new System.Drawing.Size(81, 13);
       this.label6.TabIndex = 2;
@@ -412,22 +412,19 @@
       // 
       // destinationAccountTextBox
       // 
-      this.destinationAccountTextBox.Location = new System.Drawing.Point(169, 24);
+      this.destinationAccountTextBox.Location = new System.Drawing.Point(211, 23);
       this.destinationAccountTextBox.Mask = "0000 0000 0000 0000";
       this.destinationAccountTextBox.Name = "destinationAccountTextBox";
-      this.destinationAccountTextBox.PromptChar = '0';
       this.destinationAccountTextBox.Size = new System.Drawing.Size(116, 20);
-      this.destinationAccountTextBox.TabIndex = 10;
+      this.destinationAccountTextBox.TabIndex = 9;
       // 
       // sourceAccountComboBox
       // 
-      this.sourceAccountComboBox.Culture = new System.Globalization.CultureInfo("rwk-TZ");
-      this.sourceAccountComboBox.Location = new System.Drawing.Point(29, 24);
-      this.sourceAccountComboBox.Mask = "0000 0000 0000 0000";
+      this.sourceAccountComboBox.FormattingEnabled = true;
+      this.sourceAccountComboBox.Location = new System.Drawing.Point(29, 21);
       this.sourceAccountComboBox.Name = "sourceAccountComboBox";
-      this.sourceAccountComboBox.PromptChar = '0';
-      this.sourceAccountComboBox.Size = new System.Drawing.Size(123, 20);
-      this.sourceAccountComboBox.TabIndex = 11;
+      this.sourceAccountComboBox.Size = new System.Drawing.Size(121, 21);
+      this.sourceAccountComboBox.TabIndex = 10;
       // 
       // Form1
       // 
@@ -490,8 +487,8 @@
     private System.Windows.Forms.DataGridView accountsGrid;
     private System.Windows.Forms.Label label11;
     private System.Windows.Forms.Label usernameLabel;
-    private System.Windows.Forms.MaskedTextBox sourceAccountComboBox;
     private System.Windows.Forms.MaskedTextBox destinationAccountTextBox;
+    private System.Windows.Forms.ComboBox sourceAccountComboBox;
   }
 }
 
