@@ -12,18 +12,13 @@ using System.Data.SqlClient;
 
 namespace CourseProject
 {
-  public partial class Form1 : Form
+  public partial class ClientForm : Form
   {
-    public Form1()
+    public ClientForm()
     {
       InitializeComponent();
      
       Program.connectionQuery.OpenConnection();
-      String strSQL = "SELECT city_id, name FROM Cities";
-
-      city.DataSource = Program.connectionQuery.DataSet(strSQL);
-      city.DisplayMember = "name";
-      city.ValueMember = "city_id";
 
       SqlParameter[] parameterList =
       {
@@ -65,25 +60,6 @@ namespace CourseProject
     private void Form1_Load(object sender, EventArgs e)
     {
 
-    }
-
-    private void addClientButton_Click(object sender, EventArgs e)
-    {
-      Program.connectionQuery.OpenConnection();
-
-      SqlParameter[] parameterList =
-      {
-        new SqlParameter() {ParameterName =  "@ClientName", SqlDbType = SqlDbType.NVarChar, Value = name.Text},
-        new SqlParameter() {ParameterName =  "@ClientCityId", SqlDbType = SqlDbType.Int, Value = city.SelectedValue},
-        new SqlParameter() {ParameterName =  "@ClientAddress", SqlDbType = SqlDbType.NVarChar, Value = address.Text},
-        new SqlParameter() {ParameterName =  "@PassportNumber", SqlDbType = SqlDbType.NVarChar, Value = passport.Text},
-        new SqlParameter() {ParameterName =  "@PhoneNumber", SqlDbType = SqlDbType.VarChar, Value = phoneTextBox.Text},
-        new SqlParameter() {ParameterName =  "@UserName", SqlDbType = SqlDbType.VarChar, Value = userNameTextBox.Text},
-        new SqlParameter() {ParameterName =  "@Password", SqlDbType = SqlDbType.VarChar, Value = passwordTextBox.Text}
-      };
-      Program.connectionQuery.ExecuteNonQuery("InsertClient", CommandType.StoredProcedure, parameterList);
-
-      Program.connectionQuery.CloseConnection();
     }
 
     private void sqlConnection1_InfoMessage(object sender, SqlInfoMessageEventArgs e)
@@ -175,6 +151,11 @@ namespace CourseProject
     }
 
     private void maskedComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void city_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }

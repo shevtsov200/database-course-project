@@ -39,8 +39,18 @@ namespace CourseProject
       switch(role)
       {
         case "db_client":
-          Form1 clientForm = new Form1();
+          ClientForm clientForm = new ClientForm();
           clientForm.Show();
+          this.Hide();
+          break;
+        case "db_manager":
+          ManagerForm managerForm = new ManagerForm();
+          managerForm.Show();
+          this.Hide();
+          break;
+        case "db_HR":
+          HumanResourcesForm hrForm = new HumanResourcesForm();
+          hrForm.Show();
           this.Hide();
           break;
       }
