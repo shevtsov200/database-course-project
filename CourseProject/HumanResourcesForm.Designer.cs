@@ -30,8 +30,11 @@
     {
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.addEmployeePage = new System.Windows.Forms.TabPage();
+      this.bankComboBox = new System.Windows.Forms.ComboBox();
+      this.cityComboBox = new System.Windows.Forms.ComboBox();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.tabControl1.SuspendLayout();
+      this.addEmployeePage.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -44,25 +47,44 @@
       this.tabControl1.Location = new System.Drawing.Point(13, 13);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(259, 236);
+      this.tabControl1.Size = new System.Drawing.Size(395, 307);
       this.tabControl1.TabIndex = 0;
       // 
       // addEmployeePage
       // 
+      this.addEmployeePage.Controls.Add(this.bankComboBox);
+      this.addEmployeePage.Controls.Add(this.cityComboBox);
       this.addEmployeePage.Location = new System.Drawing.Point(4, 22);
       this.addEmployeePage.Name = "addEmployeePage";
       this.addEmployeePage.Padding = new System.Windows.Forms.Padding(3);
-      this.addEmployeePage.Size = new System.Drawing.Size(251, 210);
+      this.addEmployeePage.Size = new System.Drawing.Size(387, 281);
       this.addEmployeePage.TabIndex = 0;
       this.addEmployeePage.Text = "add employee";
       this.addEmployeePage.UseVisualStyleBackColor = true;
+      // 
+      // bankComboBox
+      // 
+      this.bankComboBox.FormattingEnabled = true;
+      this.bankComboBox.Location = new System.Drawing.Point(39, 110);
+      this.bankComboBox.Name = "bankComboBox";
+      this.bankComboBox.Size = new System.Drawing.Size(121, 21);
+      this.bankComboBox.TabIndex = 1;
+      // 
+      // cityComboBox
+      // 
+      this.cityComboBox.FormattingEnabled = true;
+      this.cityComboBox.Location = new System.Drawing.Point(39, 65);
+      this.cityComboBox.Name = "cityComboBox";
+      this.cityComboBox.Size = new System.Drawing.Size(121, 21);
+      this.cityComboBox.TabIndex = 0;
+      this.cityComboBox.SelectedIndexChanged += new System.EventHandler(this.CityComboBox_SelectedIndexChanged);
       // 
       // tabPage2
       // 
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(192, 74);
+      this.tabPage2.Size = new System.Drawing.Size(387, 281);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "tabPage2";
       this.tabPage2.UseVisualStyleBackColor = true;
@@ -71,11 +93,12 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(284, 261);
+      this.ClientSize = new System.Drawing.Size(420, 332);
       this.Controls.Add(this.tabControl1);
       this.Name = "HumanResourcesForm";
       this.Text = "HRForm";
       this.tabControl1.ResumeLayout(false);
+      this.addEmployeePage.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -85,5 +108,7 @@
     private System.Windows.Forms.TabControl tabControl1;
     private System.Windows.Forms.TabPage addEmployeePage;
     private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.ComboBox bankComboBox;
+    private System.Windows.Forms.ComboBox cityComboBox;
   }
 }

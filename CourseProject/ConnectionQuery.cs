@@ -73,9 +73,15 @@ namespace CourseProject
       return dr;
     }
 
-    public object DataSet(string query)
+    public object DataSet(string query, SqlParameter[] commandParameters = null)
     {
-      SqlDataAdapter dr = new SqlDataAdapter(query, dbConnection);
+      SqlCommand cmd = new SqlCommand(query, dbConnection);
+      cmd.CommandType = CommandType.StoredProcedure;
+      SqlDataAdapter dr = new SqlDataAdapter(cmd);
+      if (commandParameters != null)
+      {
+        dr.SelectCommand.Parameters.AddRange(commandParameters);
+      }
       DataSet ds = new DataSet();
       dr.Fill(ds);
       object dataum = ds.Tables[0];

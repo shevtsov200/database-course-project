@@ -154,3 +154,14 @@ BEGIN
 	SELECT city_id, name
 	FROM Cities
 END
+GO
+ALTER PROCEDURE SelectBanksWhereCity
+(
+@cityId integer
+)
+AS
+BEGIN
+	SELECT bank_id, name
+	FROM Banks
+	WHERE Banks.city_id = @cityId
+END

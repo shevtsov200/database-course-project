@@ -24,6 +24,9 @@ namespace CourseProject
       city.ValueMember = "city_id";
 
       Program.connectionQuery.CloseConnection();
+
+      String cityStr = city.SelectedValue.ToString();
+      Console.WriteLine("manager: " + cityStr);
     }
 
     private void addEmployeePage_Click(object sender, EventArgs e)
@@ -50,10 +53,11 @@ namespace CourseProject
     {
       Program.connectionQuery.OpenConnection();
 
+
       SqlParameter[] parameterList =
       {
         new SqlParameter() {ParameterName =  "@ClientName", SqlDbType = SqlDbType.NVarChar, Value = name.Text},
-        new SqlParameter() {ParameterName =  "@ClientCityId", SqlDbType = SqlDbType.Int, Value = city.SelectedValue},
+        new SqlParameter() {ParameterName =  "@ClientCityId", SqlDbType = SqlDbType.Int, Value = city.SelectedValue },
         new SqlParameter() {ParameterName =  "@ClientAddress", SqlDbType = SqlDbType.NVarChar, Value = address.Text},
         new SqlParameter() {ParameterName =  "@PassportNumber", SqlDbType = SqlDbType.NVarChar, Value = passport.Text},
         new SqlParameter() {ParameterName =  "@PhoneNumber", SqlDbType = SqlDbType.VarChar, Value = phoneTextBox.Text},
@@ -63,6 +67,16 @@ namespace CourseProject
       Program.connectionQuery.ExecuteNonQuery("InsertClient", CommandType.StoredProcedure, parameterList);
 
       Program.connectionQuery.CloseConnection();
+    }
+
+    private void addClientButton_Click_2(object sender, EventArgs e)
+    {
+
+    }
+
+    private void city_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
   }
 }
