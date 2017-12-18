@@ -29,6 +29,12 @@ namespace CourseProject
 
     private void CityComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
+      populateWithBanksFromCity();
+    }
+
+    private void populateWithBanksFromCity()
+    {
+      bankComboBox.DataSource = null;
       Program.connectionQuery.OpenConnection();
       SqlParameter[] commandParameters =
       {
