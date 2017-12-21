@@ -268,6 +268,36 @@ ALTER PROCEDURE InsertFeedback
 )
 AS
 BEGIN
-	INSERT INTO Feedback (manager_id, feedback_text)
-	VALUES (@ManagerId, @FeedbackText) 
+	DECLARE @ClientId integer
+	exec SelectCurrentClient @ClientId OUTPUT
+	
+	DECLARE @CurrentDate date
+	SET @CurrentDate = GETDATE()
+
+	INSERT INTO Feedback (manager_id, feedback_text, rating, client_id,feedback_date)
+	VALUES (@ManagerId, @FeedbackText, @Rating, @ClientId,@CurrentDate) 
+END
+GO
+ALTER PROCEDURE SelectCurrentManager
+(
+	@ReturnValue integer OUTPUT
+)
+AS
+BEGIN
+	SET @ReturnValue = (
+		SELECT employee_id
+		FROM Employees
+		WHERE username = SUSER_NAME(SUSER_ID()))
+END
+GO
+CREATE PROCEDURE SelectCurrentManagerFeedback
+AS
+BEGIN
+	DECLARE @ManagerId integer
+	exec SelectCurrentManager @ManagerId OUTPUT
+
+	SELECT feedback_date, rating, name, feedback_text
+	FROM Feedback
+	JOIN Clients ON Clients.client_id = Feedback.Client_id
+	WHERE manager_id = @ManagerId
 END

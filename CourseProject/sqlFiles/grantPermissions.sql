@@ -20,3 +20,7 @@ GRANT EXECUTE ON dbo.InsertBankAccount TO db_client;
 GRANT EXECUTE ON dbo.SelectCurrentClient TO db_client;
 GRANT EXECUTE ON dbo.InsertTransactionToHistory TO db_client;
 GRANT EXECUTE ON dbo.SelectManagers TO db_client;
+GRANT EXECUTE ON dbo.InsertFeedback TO db_client;
+
+GRANT EXECUTE ON dbo.SelectCurrentManager TO db_manager;
+GRANT EXECUTE ON dbo.SelectCurrentManagerFeedback TO db_manager;

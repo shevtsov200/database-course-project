@@ -19,14 +19,15 @@ namespace CourseProject
 
       Program.connectionQuery.OpenConnection();
 
-      city.DataSource = Program.connectionQuery.DataSet("SelectCities");
       city.DisplayMember = "name";
       city.ValueMember = "city_id";
+      city.DataSource = Program.connectionQuery.DataSet("SelectCities");
+
+      feedbackGrid.DataSource = Program.connectionQuery.DataSet("SelectCurrentManagerFeedback");
 
       Program.connectionQuery.CloseConnection();
 
-      String cityStr = city.SelectedValue.ToString();
-      Console.WriteLine("manager: " + cityStr);
+      feedbackGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
     }
 
     private void addEmployeePage_Click(object sender, EventArgs e)
@@ -71,6 +72,23 @@ namespace CourseProject
     private void city_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+
+    private void ManagerForm_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void feedbackGrid_SelectionChanged(object sender, EventArgs e)
+    {
+      if (feedbackGrid.CurrentCell!= null)
+      {
+        DataGridViewRow row = feedbackGrid.Rows[feedbackGrid.CurrentCell.RowIndex];
+        clientTextBox.Text = row.Cells["name"].Value.ToString();
+        dateTextBox.Text = row.Cells["feedback_date"].Value.ToString();
+        feedbackTextBox.Text = row.Cells["feedback_text"].Value.ToString();
+        ratingTextBox.Text = row.Cells["rating"].Value.ToString();
+      }
     }
   }
 }
