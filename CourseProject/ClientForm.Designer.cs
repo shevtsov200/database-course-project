@@ -31,7 +31,7 @@
       this.pageControl = new System.Windows.Forms.TabControl();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.button2 = new System.Windows.Forms.Button();
-      this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+      this.interestTextBox = new System.Windows.Forms.MaskedTextBox();
       this.label5 = new System.Windows.Forms.Label();
       this.openAccountPassport = new System.Windows.Forms.MaskedTextBox();
       this.openAccountPassportLabel = new System.Windows.Forms.Label();
@@ -48,11 +48,15 @@
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
       this.label11 = new System.Windows.Forms.Label();
       this.usernameLabel = new System.Windows.Forms.Label();
+      this.historyPage = new System.Windows.Forms.TabPage();
+      this.historyGrid = new System.Windows.Forms.DataGridView();
       this.pageControl.SuspendLayout();
       this.tabPage2.SuspendLayout();
       this.showAccounts.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.accountsGrid)).BeginInit();
       this.makeTransactionPage.SuspendLayout();
+      this.historyPage.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.historyGrid)).BeginInit();
       this.SuspendLayout();
       // 
       // pageControl
@@ -63,6 +67,7 @@
       this.pageControl.Controls.Add(this.tabPage2);
       this.pageControl.Controls.Add(this.showAccounts);
       this.pageControl.Controls.Add(this.makeTransactionPage);
+      this.pageControl.Controls.Add(this.historyPage);
       this.pageControl.Location = new System.Drawing.Point(12, 12);
       this.pageControl.Name = "pageControl";
       this.pageControl.SelectedIndex = 0;
@@ -72,7 +77,7 @@
       // tabPage2
       // 
       this.tabPage2.Controls.Add(this.button2);
-      this.tabPage2.Controls.Add(this.maskedTextBox1);
+      this.tabPage2.Controls.Add(this.interestTextBox);
       this.tabPage2.Controls.Add(this.label5);
       this.tabPage2.Controls.Add(this.openAccountPassport);
       this.tabPage2.Controls.Add(this.openAccountPassportLabel);
@@ -95,13 +100,13 @@
       this.button2.UseVisualStyleBackColor = true;
       this.button2.Click += new System.EventHandler(this.button2_Click);
       // 
-      // maskedTextBox1
+      // interestTextBox
       // 
-      this.maskedTextBox1.Location = new System.Drawing.Point(72, 64);
-      this.maskedTextBox1.Mask = "00.00%";
-      this.maskedTextBox1.Name = "maskedTextBox1";
-      this.maskedTextBox1.Size = new System.Drawing.Size(43, 20);
-      this.maskedTextBox1.TabIndex = 8;
+      this.interestTextBox.Location = new System.Drawing.Point(72, 64);
+      this.interestTextBox.Mask = "00.00%";
+      this.interestTextBox.Name = "interestTextBox";
+      this.interestTextBox.Size = new System.Drawing.Size(43, 20);
+      this.interestTextBox.TabIndex = 8;
       // 
       // label5
       // 
@@ -150,6 +155,7 @@
       this.accountsGrid.Name = "accountsGrid";
       this.accountsGrid.Size = new System.Drawing.Size(423, 248);
       this.accountsGrid.TabIndex = 0;
+      this.accountsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.accountsGrid_CellContentClick);
       // 
       // makeTransactionPage
       // 
@@ -255,7 +261,30 @@
       this.usernameLabel.Text = "usernameLabel";
       this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
       // 
-      // Form1
+      // historyPage
+      // 
+      this.historyPage.Controls.Add(this.historyGrid);
+      this.historyPage.Location = new System.Drawing.Point(4, 22);
+      this.historyPage.Name = "historyPage";
+      this.historyPage.Padding = new System.Windows.Forms.Padding(3);
+      this.historyPage.Size = new System.Drawing.Size(453, 282);
+      this.historyPage.TabIndex = 4;
+      this.historyPage.Text = "transaction history";
+      this.historyPage.UseVisualStyleBackColor = true;
+      // 
+      // historyGrid
+      // 
+      this.historyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.historyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.historyGrid.Location = new System.Drawing.Point(7, 7);
+      this.historyGrid.Name = "historyGrid";
+      this.historyGrid.Size = new System.Drawing.Size(440, 269);
+      this.historyGrid.TabIndex = 0;
+      this.historyGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+      // 
+      // ClientForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -263,7 +292,7 @@
       this.Controls.Add(this.usernameLabel);
       this.Controls.Add(this.label11);
       this.Controls.Add(this.pageControl);
-      this.Name = "Form1";
+      this.Name = "ClientForm";
       this.Text = "Form1";
       this.Load += new System.EventHandler(this.Form1_Load);
       this.pageControl.ResumeLayout(false);
@@ -273,6 +302,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.accountsGrid)).EndInit();
       this.makeTransactionPage.ResumeLayout(false);
       this.makeTransactionPage.PerformLayout();
+      this.historyPage.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.historyGrid)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -283,7 +314,7 @@
     private System.Windows.Forms.TabPage tabPage2;
     private System.Windows.Forms.Label openAccountPassportLabel;
     private System.Windows.Forms.MaskedTextBox openAccountPassport;
-    private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+    private System.Windows.Forms.MaskedTextBox interestTextBox;
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.Button button2;
     private System.Windows.Forms.TabPage makeTransactionPage;
@@ -299,6 +330,8 @@
     private System.Windows.Forms.Label usernameLabel;
     private System.Windows.Forms.MaskedTextBox destinationAccountTextBox;
     private System.Windows.Forms.ComboBox sourceAccountComboBox;
+    private System.Windows.Forms.TabPage historyPage;
+    private System.Windows.Forms.DataGridView historyGrid;
   }
 }
 

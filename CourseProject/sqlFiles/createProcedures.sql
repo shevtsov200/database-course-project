@@ -19,15 +19,28 @@ Begin
 		@PhoneNumber, @UserName, @Password)
 	EXEC RegisterClient @UserName, @Password, 'db_client'
 End
-
+GO
+ALTER PROCEDURE SelectCurrentClient
+(
+	@ReturnValue integer OUTPUT
+)
+AS
+BEGIN
+	SET @ReturnValue = (
+		SELECT client_id
+		FROM Clients
+		WHERE clients.username = SUSER_NAME(SUSER_ID()))
+END
 go
 Alter Procedure InsertBankAccount
 (
-	@ClientId integer,
 	@Interest decimal(7,4)
 )
 As
 Begin
+	DECLARE @ClientId integer
+	exec SelectCurrentClient @ClientId OUTPUT
+	
 	INSERT INTO BankAccounts (client_id,balance,interest)
 	VALUES (@ClientId, 0, @Interest)
 End
@@ -133,7 +146,10 @@ BEGIN
 	SET @destinationCount = @@ROWCOUNT
 
 	IF @destinationCount = @sourceCount
+	BEGIN
 		COMMIT
+		exec insertTransactionToHistory @sourceId, @destinationId, @amount
+	END
 	ELSE
 		ROLLBACK
 END
@@ -204,4 +220,34 @@ AS
 BEGIN
 	SELECT position_id, name
 	FROM Positions
+END
+GO
+ALTER PROCEDURE SelectUserTransactions
+AS
+BEGIN
+	DECLARE @ClientId integer
+	SET @ClientId = (
+		SELECT client_id
+		FROM Clients
+		WHERE clients.username = SUSER_NAME(SUSER_ID()))
+
+	select source_id, c1.name,  destination_id, c2.name, amount 
+	from Transactions t
+	inner join BankAccounts t1 on t1.account_id = source_id
+	inner join BankAccounts t2 on t2.account_id = destination_id
+	INNER JOIN Clients c1 ON c1.client_id = t1.client_id
+	INNER JOIN Clients c2 ON c2.client_id = t2.client_id
+	WHERE t1.client_id = @ClientId OR t2.client_id = @ClientId
+END
+GO
+ALTER PROCEDURE InsertTransactionToHistory
+(
+	@SourceId integer,
+	@DestinationId integer,
+	@Amount decimal(18,4)
+)
+AS
+BEGIN
+	INSERT INTO Transactions(source_id, destination_id, amount)
+	VALUES (@SourceId, @DestinationId, @Amount)
 END

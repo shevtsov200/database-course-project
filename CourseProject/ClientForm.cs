@@ -32,21 +32,27 @@ namespace CourseProject
       pageControl.SelectedIndexChanged += new EventHandler(showAccounts_SelectedIndexChanged);
 
       accountsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+      historyGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
     }
 
     private void showAccounts_SelectedIndexChanged(object sender, EventArgs e)
     {
       switch ((sender as TabControl).SelectedIndex)
       {
-        case 2:
+        case 1:
           Program.connectionQuery.OpenConnection();
           accountsGrid.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccounts");
           Program.connectionQuery.CloseConnection();
           break;
-        case 3:
+        case 2:
           Program.connectionQuery.OpenConnection();
           sourceAccountComboBox.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccountsNumbers");
           sourceAccountComboBox.ValueMember = "account_id";
+          Program.connectionQuery.CloseConnection();
+          break;
+        case 3:
+          Program.connectionQuery.OpenConnection();
+          historyGrid.DataSource = Program.connectionQuery.DataSet("SelectUserTransactions");
           Program.connectionQuery.CloseConnection();
           break;
       }
@@ -94,26 +100,15 @@ namespace CourseProject
 
     private void button2_Click(object sender, EventArgs e)
     {
-      if (checkIfClientExists(openAccountPassport.Text))
+      string percentage = interestTextBox.Text.Trim('%');
+      decimal fraction = Convert.ToDecimal(percentage) / 100;
+      SqlParameter[] parameterList =
       {
-        SqlCommand openAccountCmd = new SqlCommand("InsertBankAccountUsingPassport", dbConnection);
-        openAccountCmd.CommandType = CommandType.StoredProcedure;
-        openAccountCmd.Parameters.Add("@PassportNumber", SqlDbType.NVarChar).Value = openAccountPassport.Text;
-
-        string percentage = maskedTextBox1.Text.Trim('%');
-        decimal fraction = Convert.ToDecimal(percentage) / 100;
-        openAccountCmd.Parameters.Add("@Interest", SqlDbType.Decimal).Value = fraction;
-
-        try
-        {
-          openAccountCmd.ExecuteNonQuery();
-        }
-        catch (SqlException exc)
-        {
-          MessageBox.Show(exc.ToString());
-        }
-      }
-
+        new SqlParameter() {ParameterName =  "@Interest", SqlDbType = SqlDbType.Decimal, Value = fraction}
+      };
+      Program.connectionQuery.OpenConnection();
+      Program.connectionQuery.ExecuteNonQuery("InsertBankAccount", CommandType.StoredProcedure, parameterList);
+      Program.connectionQuery.CloseConnection();
     }
 
     private bool checkIfClientExists(string passportNumber)
@@ -156,6 +151,16 @@ namespace CourseProject
     }
 
     private void city_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+    }
+
+    private void accountsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
     {
 
     }

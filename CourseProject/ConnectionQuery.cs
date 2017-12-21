@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace CourseProject
 {
@@ -40,7 +41,7 @@ namespace CourseProject
       }
       catch (SqlException exc)
       {
-        Console.WriteLine(exc.ToString());
+        MessageBox.Show(exc.ToString());
       }
       return null;
     }
@@ -58,7 +59,7 @@ namespace CourseProject
       }
       catch (SqlException exc)
       {
-        Console.WriteLine(exc.ToString());
+        MessageBox.Show(exc.ToString());
       }
     }
 
