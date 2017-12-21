@@ -19,3 +19,4 @@ GRANT EXECUTE ON dbo.SelectPositions TO db_hr;
 GRANT EXECUTE ON dbo.InsertBankAccount TO db_client;
 GRANT EXECUTE ON dbo.SelectCurrentClient TO db_client;
 GRANT EXECUTE ON dbo.InsertTransactionToHistory TO db_client;
+GRANT EXECUTE ON dbo.SelectManagers TO db_client;

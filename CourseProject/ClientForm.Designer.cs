@@ -50,6 +50,12 @@
       this.usernameLabel = new System.Windows.Forms.Label();
       this.historyPage = new System.Windows.Forms.TabPage();
       this.historyGrid = new System.Windows.Forms.DataGridView();
+      this.LeaveFeedback = new System.Windows.Forms.TabPage();
+      this.feedbackTextBox = new System.Windows.Forms.TextBox();
+      this.sendFeedbackButton = new System.Windows.Forms.Button();
+      this.label1 = new System.Windows.Forms.Label();
+      this.ratingComboBox = new System.Windows.Forms.ComboBox();
+      this.managerComboBox = new System.Windows.Forms.ComboBox();
       this.pageControl.SuspendLayout();
       this.tabPage2.SuspendLayout();
       this.showAccounts.SuspendLayout();
@@ -57,6 +63,7 @@
       this.makeTransactionPage.SuspendLayout();
       this.historyPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.historyGrid)).BeginInit();
+      this.LeaveFeedback.SuspendLayout();
       this.SuspendLayout();
       // 
       // pageControl
@@ -68,6 +75,7 @@
       this.pageControl.Controls.Add(this.showAccounts);
       this.pageControl.Controls.Add(this.makeTransactionPage);
       this.pageControl.Controls.Add(this.historyPage);
+      this.pageControl.Controls.Add(this.LeaveFeedback);
       this.pageControl.Location = new System.Drawing.Point(12, 12);
       this.pageControl.Name = "pageControl";
       this.pageControl.SelectedIndex = 0;
@@ -284,6 +292,67 @@
       this.historyGrid.TabIndex = 0;
       this.historyGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
       // 
+      // LeaveFeedback
+      // 
+      this.LeaveFeedback.Controls.Add(this.managerComboBox);
+      this.LeaveFeedback.Controls.Add(this.ratingComboBox);
+      this.LeaveFeedback.Controls.Add(this.label1);
+      this.LeaveFeedback.Controls.Add(this.sendFeedbackButton);
+      this.LeaveFeedback.Controls.Add(this.feedbackTextBox);
+      this.LeaveFeedback.Location = new System.Drawing.Point(4, 22);
+      this.LeaveFeedback.Name = "LeaveFeedback";
+      this.LeaveFeedback.Size = new System.Drawing.Size(453, 282);
+      this.LeaveFeedback.TabIndex = 5;
+      this.LeaveFeedback.Text = "leave feedback";
+      this.LeaveFeedback.UseVisualStyleBackColor = true;
+      // 
+      // feedbackTextBox
+      // 
+      this.feedbackTextBox.AcceptsReturn = true;
+      this.feedbackTextBox.AcceptsTab = true;
+      this.feedbackTextBox.AllowDrop = true;
+      this.feedbackTextBox.Location = new System.Drawing.Point(20, 37);
+      this.feedbackTextBox.MaxLength = 4000;
+      this.feedbackTextBox.Multiline = true;
+      this.feedbackTextBox.Name = "feedbackTextBox";
+      this.feedbackTextBox.Size = new System.Drawing.Size(407, 203);
+      this.feedbackTextBox.TabIndex = 0;
+      // 
+      // sendFeedbackButton
+      // 
+      this.sendFeedbackButton.Location = new System.Drawing.Point(20, 246);
+      this.sendFeedbackButton.Name = "sendFeedbackButton";
+      this.sendFeedbackButton.Size = new System.Drawing.Size(132, 23);
+      this.sendFeedbackButton.TabIndex = 1;
+      this.sendFeedbackButton.Text = "send feedback";
+      this.sendFeedbackButton.UseVisualStyleBackColor = true;
+      this.sendFeedbackButton.Click += new System.EventHandler(this.button1_Click);
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(20, 10);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(48, 13);
+      this.label1.TabIndex = 3;
+      this.label1.Text = "manager";
+      // 
+      // ratingComboBox
+      // 
+      this.ratingComboBox.FormattingEnabled = true;
+      this.ratingComboBox.Location = new System.Drawing.Point(241, 10);
+      this.ratingComboBox.Name = "ratingComboBox";
+      this.ratingComboBox.Size = new System.Drawing.Size(87, 21);
+      this.ratingComboBox.TabIndex = 4;
+      // 
+      // managerComboBox
+      // 
+      this.managerComboBox.FormattingEnabled = true;
+      this.managerComboBox.Location = new System.Drawing.Point(75, 10);
+      this.managerComboBox.Name = "managerComboBox";
+      this.managerComboBox.Size = new System.Drawing.Size(121, 21);
+      this.managerComboBox.TabIndex = 5;
+      // 
       // ClientForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,6 +373,8 @@
       this.makeTransactionPage.PerformLayout();
       this.historyPage.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.historyGrid)).EndInit();
+      this.LeaveFeedback.ResumeLayout(false);
+      this.LeaveFeedback.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -332,6 +403,12 @@
     private System.Windows.Forms.ComboBox sourceAccountComboBox;
     private System.Windows.Forms.TabPage historyPage;
     private System.Windows.Forms.DataGridView historyGrid;
+    private System.Windows.Forms.TabPage LeaveFeedback;
+    private System.Windows.Forms.ComboBox ratingComboBox;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Button sendFeedbackButton;
+    private System.Windows.Forms.TextBox feedbackTextBox;
+    private System.Windows.Forms.ComboBox managerComboBox;
   }
 }
 

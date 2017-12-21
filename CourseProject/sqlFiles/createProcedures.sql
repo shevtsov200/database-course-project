@@ -251,3 +251,23 @@ BEGIN
 	INSERT INTO Transactions(source_id, destination_id, amount)
 	VALUES (@SourceId, @DestinationId, @Amount)
 END
+GO
+ALTER PROCEDURE SelectManagers
+AS
+BEGIN
+	SELECT employee_id, name
+	FROM Employees
+	WHERE Employees.position_id = 1
+END
+GO
+ALTER PROCEDURE InsertFeedback
+(
+	@ManagerId integer,
+	@FeedbackText nvarchar(4000),
+	@Rating integer
+)
+AS
+BEGIN
+	INSERT INTO Feedback (manager_id, feedback_text)
+	VALUES (@ManagerId, @FeedbackText) 
+END

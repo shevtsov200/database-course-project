@@ -55,6 +55,27 @@ namespace CourseProject
           historyGrid.DataSource = Program.connectionQuery.DataSet("SelectUserTransactions");
           Program.connectionQuery.CloseConnection();
           break;
+        case 4:
+          ratingComboBox.DisplayMember = "Text";
+          ratingComboBox.ValueMember = "Value";
+
+          var items = new[] 
+          {
+            new { Text = "Worst", Value = 1 },
+            new { Text = "Bad", Value = 2 },
+            new { Text = "Average", Value = 3 },
+            new { Text = "Good", Value = 4 },
+            new { Text = "Best", Value = 5 }
+        };
+
+          ratingComboBox.DataSource = items;
+
+          Program.connectionQuery.OpenConnection();
+          managerComboBox.DisplayMember = "name";
+          managerComboBox.ValueMember = "employee_id";
+          managerComboBox.DataSource = Program.connectionQuery.DataSet("SelectManagers");
+          Program.connectionQuery.CloseConnection();
+          break;
       }
     }
 
@@ -163,6 +184,20 @@ namespace CourseProject
     private void accountsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
     {
 
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      SqlParameter[] parameterList =
+{
+        new SqlParameter() {ParameterName =  "@ManagerId", SqlDbType = SqlDbType.Int, Value = managerComboBox.SelectedValue},
+        new SqlParameter() {ParameterName =  "@FeedbackText", SqlDbType = SqlDbType.NVarChar, Value = feedbackTextBox.Text},
+        new SqlParameter() {ParameterName = "@Rating", SqlDbType = SqlDbType.Int, Value = ratingComboBox.SelectedValue}
+      };
+
+      Program.connectionQuery.OpenConnection();
+      Program.connectionQuery.ExecuteNonQuery("InsertFeedback", CommandType.StoredProcedure, parameterList);
+      Program.connectionQuery.CloseConnection();
     }
   }
 }
