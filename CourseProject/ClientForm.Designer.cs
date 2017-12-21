@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.pageControl = new System.Windows.Forms.TabControl();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.button2 = new System.Windows.Forms.Button();
@@ -45,17 +46,20 @@
       this.label8 = new System.Windows.Forms.Label();
       this.label7 = new System.Windows.Forms.Label();
       this.label6 = new System.Windows.Forms.Label();
-      this.dbConnection = new System.Data.SqlClient.SqlConnection();
-      this.label11 = new System.Windows.Forms.Label();
-      this.usernameLabel = new System.Windows.Forms.Label();
       this.historyPage = new System.Windows.Forms.TabPage();
       this.historyGrid = new System.Windows.Forms.DataGridView();
       this.LeaveFeedback = new System.Windows.Forms.TabPage();
-      this.feedbackTextBox = new System.Windows.Forms.TextBox();
-      this.sendFeedbackButton = new System.Windows.Forms.Button();
-      this.label1 = new System.Windows.Forms.Label();
-      this.ratingComboBox = new System.Windows.Forms.ComboBox();
       this.managerComboBox = new System.Windows.Forms.ComboBox();
+      this.ratingComboBox = new System.Windows.Forms.ComboBox();
+      this.label1 = new System.Windows.Forms.Label();
+      this.sendFeedbackButton = new System.Windows.Forms.Button();
+      this.feedbackTextBox = new System.Windows.Forms.TextBox();
+      this.dbConnection = new System.Data.SqlClient.SqlConnection();
+      this.label11 = new System.Windows.Forms.Label();
+      this.usernameLabel = new System.Windows.Forms.Label();
+      this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+      this.menuItem1 = new System.Windows.Forms.MenuItem();
+      this.menuItem2 = new System.Windows.Forms.MenuItem();
       this.pageControl.SuspendLayout();
       this.tabPage2.SuspendLayout();
       this.showAccounts.SuspendLayout();
@@ -242,33 +246,6 @@
       this.label6.TabIndex = 2;
       this.label6.Text = "source account";
       // 
-      // dbConnection
-      // 
-      this.dbConnection.FireInfoMessageEventOnUserErrors = false;
-      // 
-      // label11
-      // 
-      this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-      this.label11.AutoSize = true;
-      this.label11.Location = new System.Drawing.Point(16, 323);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(66, 13);
-      this.label11.TabIndex = 9;
-      this.label11.Text = "current user:";
-      // 
-      // usernameLabel
-      // 
-      this.usernameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-      this.usernameLabel.AutoSize = true;
-      this.usernameLabel.Location = new System.Drawing.Point(89, 323);
-      this.usernameLabel.Name = "usernameLabel";
-      this.usernameLabel.Size = new System.Drawing.Size(79, 13);
-      this.usernameLabel.TabIndex = 10;
-      this.usernameLabel.Text = "usernameLabel";
-      this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
-      // 
       // historyPage
       // 
       this.historyPage.Controls.Add(this.historyGrid);
@@ -306,6 +283,43 @@
       this.LeaveFeedback.Text = "leave feedback";
       this.LeaveFeedback.UseVisualStyleBackColor = true;
       // 
+      // managerComboBox
+      // 
+      this.managerComboBox.FormattingEnabled = true;
+      this.managerComboBox.Location = new System.Drawing.Point(75, 10);
+      this.managerComboBox.Name = "managerComboBox";
+      this.managerComboBox.Size = new System.Drawing.Size(121, 21);
+      this.managerComboBox.TabIndex = 5;
+      this.managerComboBox.SelectedIndexChanged += new System.EventHandler(this.managerComboBox_SelectedIndexChanged);
+      // 
+      // ratingComboBox
+      // 
+      this.ratingComboBox.FormattingEnabled = true;
+      this.ratingComboBox.Location = new System.Drawing.Point(241, 10);
+      this.ratingComboBox.Name = "ratingComboBox";
+      this.ratingComboBox.Size = new System.Drawing.Size(87, 21);
+      this.ratingComboBox.TabIndex = 4;
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(20, 10);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(48, 13);
+      this.label1.TabIndex = 3;
+      this.label1.Text = "manager";
+      this.label1.Click += new System.EventHandler(this.label1_Click_1);
+      // 
+      // sendFeedbackButton
+      // 
+      this.sendFeedbackButton.Location = new System.Drawing.Point(20, 246);
+      this.sendFeedbackButton.Name = "sendFeedbackButton";
+      this.sendFeedbackButton.Size = new System.Drawing.Size(132, 23);
+      this.sendFeedbackButton.TabIndex = 1;
+      this.sendFeedbackButton.Text = "send feedback";
+      this.sendFeedbackButton.UseVisualStyleBackColor = true;
+      this.sendFeedbackButton.Click += new System.EventHandler(this.button1_Click);
+      // 
       // feedbackTextBox
       // 
       this.feedbackTextBox.AcceptsReturn = true;
@@ -318,40 +332,50 @@
       this.feedbackTextBox.Size = new System.Drawing.Size(407, 203);
       this.feedbackTextBox.TabIndex = 0;
       // 
-      // sendFeedbackButton
+      // dbConnection
       // 
-      this.sendFeedbackButton.Location = new System.Drawing.Point(20, 246);
-      this.sendFeedbackButton.Name = "sendFeedbackButton";
-      this.sendFeedbackButton.Size = new System.Drawing.Size(132, 23);
-      this.sendFeedbackButton.TabIndex = 1;
-      this.sendFeedbackButton.Text = "send feedback";
-      this.sendFeedbackButton.UseVisualStyleBackColor = true;
-      this.sendFeedbackButton.Click += new System.EventHandler(this.button1_Click);
+      this.dbConnection.FireInfoMessageEventOnUserErrors = false;
       // 
-      // label1
+      // label11
       // 
-      this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(20, 10);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(48, 13);
-      this.label1.TabIndex = 3;
-      this.label1.Text = "manager";
+      this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(16, 323);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(66, 13);
+      this.label11.TabIndex = 9;
+      this.label11.Text = "current user:";
       // 
-      // ratingComboBox
+      // usernameLabel
       // 
-      this.ratingComboBox.FormattingEnabled = true;
-      this.ratingComboBox.Location = new System.Drawing.Point(241, 10);
-      this.ratingComboBox.Name = "ratingComboBox";
-      this.ratingComboBox.Size = new System.Drawing.Size(87, 21);
-      this.ratingComboBox.TabIndex = 4;
+      this.usernameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+      this.usernameLabel.AutoSize = true;
+      this.usernameLabel.Location = new System.Drawing.Point(89, 323);
+      this.usernameLabel.Name = "usernameLabel";
+      this.usernameLabel.Size = new System.Drawing.Size(79, 13);
+      this.usernameLabel.TabIndex = 10;
+      this.usernameLabel.Text = "usernameLabel";
+      this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
       // 
-      // managerComboBox
+      // mainMenu1
       // 
-      this.managerComboBox.FormattingEnabled = true;
-      this.managerComboBox.Location = new System.Drawing.Point(75, 10);
-      this.managerComboBox.Name = "managerComboBox";
-      this.managerComboBox.Size = new System.Drawing.Size(121, 21);
-      this.managerComboBox.TabIndex = 5;
+      this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1});
+      // 
+      // menuItem1
+      // 
+      this.menuItem1.Index = 0;
+      this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem2});
+      this.menuItem1.Text = "Network";
+      // 
+      // menuItem2
+      // 
+      this.menuItem2.Index = 0;
+      this.menuItem2.Text = "Log out";
+      this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
       // 
       // ClientForm
       // 
@@ -361,6 +385,7 @@
       this.Controls.Add(this.usernameLabel);
       this.Controls.Add(this.label11);
       this.Controls.Add(this.pageControl);
+      this.Menu = this.mainMenu1;
       this.Name = "ClientForm";
       this.Text = "Form1";
       this.Load += new System.EventHandler(this.Form1_Load);
@@ -409,6 +434,9 @@
     private System.Windows.Forms.Button sendFeedbackButton;
     private System.Windows.Forms.TextBox feedbackTextBox;
     private System.Windows.Forms.ComboBox managerComboBox;
+    private System.Windows.Forms.MainMenu mainMenu1;
+    private System.Windows.Forms.MenuItem menuItem1;
+    private System.Windows.Forms.MenuItem menuItem2;
   }
 }
 

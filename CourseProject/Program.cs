@@ -12,13 +12,15 @@ namespace CourseProject
     /// The main entry point for the application.
     /// </summary>
     public static ConnectionQuery connectionQuery;
+    public static LoginForm loginForm;
     [STAThread]
     static void Main()
     {
       connectionQuery = new ConnectionQuery();
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new LoginForm());
+      loginForm = new LoginForm();
+      Application.Run(loginForm);
     }
   }
 }

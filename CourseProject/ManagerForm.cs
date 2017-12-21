@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
@@ -89,6 +83,12 @@ namespace CourseProject
         feedbackTextBox.Text = row.Cells["feedback_text"].Value.ToString();
         ratingTextBox.Text = row.Cells["rating"].Value.ToString();
       }
+    }
+
+    private void logoutMenu_Click(object sender, EventArgs e)
+    {
+      Program.loginForm.Show();
+      Close();
     }
   }
 }

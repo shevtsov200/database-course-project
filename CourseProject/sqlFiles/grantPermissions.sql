@@ -11,7 +11,7 @@ GRANT EXECUTE ON dbo.SelectCities TO db_manager, db_hr;
 GRANT EXECUTE ON dbo.SelectBanksWhereCity TO db_hr;
 
 GRANT EXECUTE ON dbo.InsertClient TO db_manager, db_client;
-GRANT EXECUTE ON dbo.RegisterClient TO db_manager, db_client;
+GRANT EXECUTE ON dbo.RegisterClient TO db_manager;
 
 GRANT EXECUTE ON dbo.InsertEmployee TO db_hr;
 GRANT EXECUTE ON dbo.SelectPositions TO db_hr;
@@ -24,3 +24,8 @@ GRANT EXECUTE ON dbo.InsertFeedback TO db_client;
 
 GRANT EXECUTE ON dbo.SelectCurrentManager TO db_manager;
 GRANT EXECUTE ON dbo.SelectCurrentManagerFeedback TO db_manager;
+
+GRANT EXECUTE ON dbo.SelectManagersRating TO db_hr;
+GRANT EXECUTE ON dbo.RegisterEmployee TO db_hr;
+GRANT EXECUTE ON dbo.SelectEmployees TO db_hr;
+GRANT EXECUTE ON dbo.DeleteEmployee TO db_hr;

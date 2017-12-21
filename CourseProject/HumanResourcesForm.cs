@@ -81,5 +81,54 @@ namespace CourseProject
     {
 
     }
+
+    private void logoutMenu_Click(object sender, EventArgs e)
+    {
+      Program.loginForm.Show();
+      Close();
+    }
+
+    private void employeeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+      SqlParameter[] parameterList =
+      {
+        new SqlParameter() {ParameterName =  "@EmployeeId", SqlDbType = SqlDbType.Int, Value = employeeComboBox.SelectedValue}
+      };
+      Program.connectionQuery.OpenConnection();
+      Program.connectionQuery.ExecuteNonQuery("DeleteEmployee", CommandType.StoredProcedure, parameterList);
+      Program.connectionQuery.CloseConnection();
+
+      repopulateEmployeeComboBox();
+    }
+
+    private void repopulateEmployeeComboBox()
+    {
+      Program.connectionQuery.OpenConnection();
+      employeeComboBox.DisplayMember = "name";
+      employeeComboBox.ValueMember = "employee_id";
+      employeeComboBox.DataSource = Program.connectionQuery.DataSet("SelectEmployees");
+      Program.connectionQuery.CloseConnection();
+    }
+
+    private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      switch ((sender as TabControl).SelectedIndex)
+      {
+        case 1:
+          Program.connectionQuery.OpenConnection();
+          ratingGrid.DataSource = Program.connectionQuery.DataSet("SelectManagersRating");
+          ratingGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+          Program.connectionQuery.CloseConnection();
+          break;
+        case 2:
+          repopulateEmployeeComboBox();
+          break;
+      }
+    }
   }
 }

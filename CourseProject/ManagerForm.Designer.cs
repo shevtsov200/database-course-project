@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.addClientPage = new System.Windows.Forms.TabPage();
       this.passwordTextBox = new System.Windows.Forms.TextBox();
@@ -51,10 +52,15 @@
       this.clientTextBox = new System.Windows.Forms.TextBox();
       this.dateTextBox = new System.Windows.Forms.TextBox();
       this.ratingTextBox = new System.Windows.Forms.TextBox();
+      this.viewFeedbackLayout = new System.Windows.Forms.TableLayoutPanel();
+      this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+      this.menuItem1 = new System.Windows.Forms.MenuItem();
+      this.logoutMenu = new System.Windows.Forms.MenuItem();
       this.tabControl1.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.viewFeedbackPage.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.feedbackGrid)).BeginInit();
+      this.viewFeedbackLayout.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -67,7 +73,7 @@
       this.tabControl1.Location = new System.Drawing.Point(13, 13);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
-      this.tabControl1.Size = new System.Drawing.Size(459, 306);
+      this.tabControl1.Size = new System.Drawing.Size(641, 441);
       this.tabControl1.TabIndex = 0;
       // 
       // addClientPage
@@ -225,12 +231,10 @@
       // 
       this.viewFeedbackPage.Controls.Add(this.ratingTextBox);
       this.viewFeedbackPage.Controls.Add(this.dateTextBox);
-      this.viewFeedbackPage.Controls.Add(this.clientTextBox);
-      this.viewFeedbackPage.Controls.Add(this.feedbackTextBox);
-      this.viewFeedbackPage.Controls.Add(this.feedbackGrid);
+      this.viewFeedbackPage.Controls.Add(this.viewFeedbackLayout);
       this.viewFeedbackPage.Location = new System.Drawing.Point(4, 22);
       this.viewFeedbackPage.Name = "viewFeedbackPage";
-      this.viewFeedbackPage.Size = new System.Drawing.Size(451, 280);
+      this.viewFeedbackPage.Size = new System.Drawing.Size(633, 415);
       this.viewFeedbackPage.TabIndex = 4;
       this.viewFeedbackPage.Text = "view feedback";
       this.viewFeedbackPage.UseVisualStyleBackColor = true;
@@ -241,25 +245,26 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.feedbackGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.feedbackGrid.Location = new System.Drawing.Point(3, 158);
+      this.feedbackGrid.Location = new System.Drawing.Point(3, 223);
       this.feedbackGrid.Name = "feedbackGrid";
-      this.feedbackGrid.Size = new System.Drawing.Size(445, 119);
+      this.feedbackGrid.Size = new System.Drawing.Size(627, 189);
       this.feedbackGrid.TabIndex = 0;
       this.feedbackGrid.SelectionChanged += new System.EventHandler(this.feedbackGrid_SelectionChanged);
       // 
       // feedbackTextBox
       // 
-      this.feedbackTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.feedbackTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.feedbackTextBox.Location = new System.Drawing.Point(3, 30);
+      this.feedbackTextBox.Location = new System.Drawing.Point(3, 29);
       this.feedbackTextBox.Name = "feedbackTextBox";
-      this.feedbackTextBox.Size = new System.Drawing.Size(445, 122);
+      this.feedbackTextBox.Size = new System.Drawing.Size(627, 188);
       this.feedbackTextBox.TabIndex = 1;
       this.feedbackTextBox.Text = "";
       // 
       // clientTextBox
       // 
-      this.clientTextBox.Location = new System.Drawing.Point(4, 4);
+      this.clientTextBox.Location = new System.Drawing.Point(3, 3);
       this.clientTextBox.Name = "clientTextBox";
       this.clientTextBox.Size = new System.Drawing.Size(94, 20);
       this.clientTextBox.TabIndex = 2;
@@ -267,7 +272,7 @@
       // dateTextBox
       // 
       this.dateTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.dateTextBox.Location = new System.Drawing.Point(348, 4);
+      this.dateTextBox.Location = new System.Drawing.Point(530, 4);
       this.dateTextBox.Name = "dateTextBox";
       this.dateTextBox.Size = new System.Drawing.Size(100, 20);
       this.dateTextBox.TabIndex = 3;
@@ -279,12 +284,48 @@
       this.ratingTextBox.Size = new System.Drawing.Size(26, 20);
       this.ratingTextBox.TabIndex = 4;
       // 
+      // viewFeedbackLayout
+      // 
+      this.viewFeedbackLayout.ColumnCount = 1;
+      this.viewFeedbackLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.viewFeedbackLayout.Controls.Add(this.clientTextBox, 0, 0);
+      this.viewFeedbackLayout.Controls.Add(this.feedbackTextBox, 0, 1);
+      this.viewFeedbackLayout.Controls.Add(this.feedbackGrid, 0, 2);
+      this.viewFeedbackLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.viewFeedbackLayout.Location = new System.Drawing.Point(0, 0);
+      this.viewFeedbackLayout.Name = "viewFeedbackLayout";
+      this.viewFeedbackLayout.RowCount = 3;
+      this.viewFeedbackLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.viewFeedbackLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.viewFeedbackLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.viewFeedbackLayout.Size = new System.Drawing.Size(633, 415);
+      this.viewFeedbackLayout.TabIndex = 5;
+      // 
+      // mainMenu1
+      // 
+      this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1});
+      // 
+      // menuItem1
+      // 
+      this.menuItem1.Index = 0;
+      this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.logoutMenu});
+      this.menuItem1.Text = "Network";
+      // 
+      // logoutMenu
+      // 
+      this.logoutMenu.Index = 0;
+      this.logoutMenu.Text = "Log out";
+      this.logoutMenu.Click += new System.EventHandler(this.logoutMenu_Click);
+      // 
       // ManagerForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(484, 331);
+      this.ClientSize = new System.Drawing.Size(666, 466);
       this.Controls.Add(this.tabControl1);
+      this.Menu = this.mainMenu1;
       this.Name = "ManagerForm";
       this.Text = "ManagerForm";
       this.Load += new System.EventHandler(this.ManagerForm_Load);
@@ -294,6 +335,8 @@
       this.viewFeedbackPage.ResumeLayout(false);
       this.viewFeedbackPage.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.feedbackGrid)).EndInit();
+      this.viewFeedbackLayout.ResumeLayout(false);
+      this.viewFeedbackLayout.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -323,5 +366,9 @@
     private System.Windows.Forms.TextBox clientTextBox;
     private System.Windows.Forms.RichTextBox feedbackTextBox;
     private System.Windows.Forms.TextBox ratingTextBox;
+    private System.Windows.Forms.TableLayoutPanel viewFeedbackLayout;
+    private System.Windows.Forms.MainMenu mainMenu1;
+    private System.Windows.Forms.MenuItem menuItem1;
+    private System.Windows.Forms.MenuItem logoutMenu;
   }
 }

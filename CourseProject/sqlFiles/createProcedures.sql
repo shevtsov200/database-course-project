@@ -17,7 +17,7 @@ Begin
 		phone_number, username, client_password) 
 	VALUES (@ClientName, @ClientCityId, @ClientAddress, @PassportNumber, 
 		@PhoneNumber, @UserName, @Password)
-	EXEC RegisterClient @UserName, @Password, 'db_client'
+	EXEC RegisterClient @UserName, @Password
 End
 GO
 ALTER PROCEDURE SelectCurrentClient
@@ -67,7 +67,25 @@ Begin
 	EXEC InsertBankAccount @ClientId,@Interest
 End
 GO
-Alter Procedure RegisterClient
+ALTER PROCEDURE RegisterClient
+(
+	@UserName varchar(20),
+	@Password varchar(20)
+)
+AS
+BEGIN
+	DECLARE @SQL NVARCHAR(1500);
+
+	set @SQL =  'create login ' + @UserName + 
+               ' with password = ''' + @Password + ''';'
+	EXECUTE(@SQL);
+	set @SQL = 'create user ' + @UserName + ' for login ' +
+				@UserName 
+				+ '; exec sp_addrolemember '+ '''db_client''' +',''' + @UserName + ''';' 
+	execute(@SQL);
+END
+GO
+ALTER Procedure RegisterEmployee
 (
 	@UserName nvarchar(20),
 	@Password nvarchar(20),
@@ -81,8 +99,12 @@ Begin
                ' with password = ''' + @Password + ''';'
    EXECUTE(@SQL);
    set @SQL = 'create user ' + @UserName + ' for login ' +
-				@UserName + '; exec sp_addrolemember '+ ''''+ @Role + '''' +
-				',''' + @UserName + ''';'
+				@UserName 
+				+ '; exec sp_addrolemember '+ ''''+ @Role + '''' +',''' + @UserName + ''';' 
+				--+ ' exec sp_addsrvrolemember '+ @UserName +',''setupadmin'';'
+				--+ ' exec sp_addrolemember '+ '''db_securityadmin'''+',''' + @UserName + ''';'
+				--+ ' exec sp_addrolemember '+ '''db_accessadmin'''+',''' + @UserName + ''';'
+				--+ ' exec sp_addsrvrolemember '+ @UserName +',''securityadmin'';'  
 	execute(@SQL);
 ENd
 GO
@@ -212,7 +234,7 @@ Begin
 	VALUES (@EmployeeName, @BankId, @EmployeeAddress, @PassportNumber, 
 		@Salary, @PhoneNumber, @UserName, @Password, @PositionId)
 	
-	EXEC RegisterClient @UserName, @Password, @RoleName
+	EXEC RegisterEmployee @UserName, @Password, @RoleName
 End
 GO
 ALTER PROCEDURE SelectPositions
@@ -290,7 +312,7 @@ BEGIN
 		WHERE username = SUSER_NAME(SUSER_ID()))
 END
 GO
-CREATE PROCEDURE SelectCurrentManagerFeedback
+ALTER PROCEDURE SelectCurrentManagerFeedback
 AS
 BEGIN
 	DECLARE @ManagerId integer
@@ -300,4 +322,36 @@ BEGIN
 	FROM Feedback
 	JOIN Clients ON Clients.client_id = Feedback.Client_id
 	WHERE manager_id = @ManagerId
+END
+GO
+ALTER PROCEDURE SelectManagersRating
+AS
+BEGIN
+	SELECT name, ISNULL(t.rating,0)
+	FROM Employees
+	JOIN
+	(SELECT employee_id, sum(rating) as rating
+	FROM Employees
+	LEFT JOIN Feedback ON Employees.employee_id = Feedback.manager_id
+	WHERE position_id = 1
+	GROUP BY employee_id) as t
+	ON t.employee_id = Employees.employee_id
+	ORDER BY t.rating DESC
+END
+GO
+ALTER PROCEDURE SelectEmployees
+AS
+BEGIN
+	SELECT name, employee_id
+	FROM Employees
+END
+GO
+ALTER PROCEDURE DeleteEmployee
+(
+	@EmployeeId integer
+)
+AS
+BEGIN
+	DELETE FROM Employees
+	WHERE employee_id = @EmployeeId
 END

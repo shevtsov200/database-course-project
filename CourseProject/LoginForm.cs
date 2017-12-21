@@ -35,17 +35,17 @@ namespace CourseProject
         case "db_client":
           ClientForm clientForm = new ClientForm();
           clientForm.Show();
-          this.Hide();
+          Hide();
           break;
         case "db_manager":
           ManagerForm managerForm = new ManagerForm();
           managerForm.Show();
-          this.Hide();
+          Hide();
           break;
         case "db_HR":
           HumanResourcesForm hrForm = new HumanResourcesForm();
           hrForm.Show();
-          this.Hide();
+          Hide();
           break;
       }
 
