@@ -53,7 +53,6 @@ namespace CourseProject
     {
       Program.connectionQuery.OpenConnection();
 
-
       SqlParameter[] parameterList =
       {
         new SqlParameter() {ParameterName =  "@ClientName", SqlDbType = SqlDbType.NVarChar, Value = name.Text},
@@ -67,11 +66,6 @@ namespace CourseProject
       Program.connectionQuery.ExecuteNonQuery("InsertClient", CommandType.StoredProcedure, parameterList);
 
       Program.connectionQuery.CloseConnection();
-    }
-
-    private void addClientButton_Click_2(object sender, EventArgs e)
-    {
-
     }
 
     private void city_SelectedIndexChanged(object sender, EventArgs e)

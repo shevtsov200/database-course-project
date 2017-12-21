@@ -169,7 +169,7 @@
       this.addClientButton.TabIndex = 6;
       this.addClientButton.Text = "add client";
       this.addClientButton.UseVisualStyleBackColor = true;
-      this.addClientButton.Click += new System.EventHandler(this.addClientButton_Click_2);
+      this.addClientButton.Click += new System.EventHandler(this.addClientButton_Click_1);
       // 
       // label3
       // 

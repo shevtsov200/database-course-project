@@ -17,7 +17,7 @@ Begin
 		phone_number, username, client_password) 
 	VALUES (@ClientName, @ClientCityId, @ClientAddress, @PassportNumber, 
 		@PhoneNumber, @UserName, @Password)
-	EXEC RegisterClient @UserName, @Password
+	EXEC RegisterClient @UserName, @Password, 'db_client'
 End
 
 go
@@ -57,7 +57,8 @@ GO
 Alter Procedure RegisterClient
 (
 	@UserName nvarchar(20),
-	@Password nvarchar(20)
+	@Password nvarchar(20),
+	@Role nvarchar(20)
 )
 As
 Begin
@@ -67,7 +68,7 @@ Begin
                ' with password = ''' + @Password + ''';'
    EXECUTE(@SQL);
    set @SQL = 'create user ' + @UserName + ' for login ' +
-				@UserName + '; exec sp_addrolemember ''db_client''' +
+				@UserName + '; exec sp_addrolemember '+ ''''+ @Role + '''' +
 				',''' + @UserName + ''';'
 	execute(@SQL);
 ENd
@@ -85,7 +86,7 @@ BEGIN
 	ON role_members.role_principal_id = roles.principal_id
 	JOIN sys.database_principals members
 	ON role_members.member_principal_id = members.principal_id
-	WHERE members.NAME = @UserName)
+	WHERE members.NAME = @UserName and roles.NAME in ('db_client', 'db_manager', 'db_hr'))
 END
 GO
 ALTER PROCEDURE SelectUserLogin
@@ -164,4 +165,43 @@ BEGIN
 	SELECT bank_id, name
 	FROM Banks
 	WHERE Banks.city_id = @cityId
+END
+GO
+ALTER PROCEDURE InsertEmployee
+(
+	@EmployeeName nvarchar(40),
+	@BankId integer,
+	@EmployeeAddress nvarchar(80),
+	@Salary decimal(18,4),
+	@PassportNumber nvarchar(25),
+	@PhoneNumber varchar(20),
+	@UserName varchar(20),
+	@Password varchar(20),
+	@PositionId integer
+)
+As
+Begin
+	DECLARE @RoleName varchar(40)
+
+	SET @RoleName = (
+		SELECT name 
+		FROM Roles 
+		WHERE role_id = (
+			SELECT role_id
+			FROM Positions
+			WHERE position_id = @PositionId))
+
+	INSERT INTO Employees (name, bank_id, employee_address, passport_number,
+		salary, phone_number, username, employee_password, position_id)
+	VALUES (@EmployeeName, @BankId, @EmployeeAddress, @PassportNumber, 
+		@Salary, @PhoneNumber, @UserName, @Password, @PositionId)
+	
+	EXEC RegisterClient @UserName, @Password, @RoleName
+End
+GO
+ALTER PROCEDURE SelectPositions
+AS
+BEGIN
+	SELECT position_id, name
+	FROM Positions
 END

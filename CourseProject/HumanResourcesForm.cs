@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
@@ -23,6 +17,10 @@ namespace CourseProject
       cityComboBox.DisplayMember = "name";
       cityComboBox.ValueMember = "city_id";
       cityComboBox.DataSource = Program.connectionQuery.DataSet("SelectCities");
+
+      positionComboBox.DisplayMember = "name";
+      positionComboBox.ValueMember = "position_id";
+      positionComboBox.DataSource = Program.connectionQuery.DataSet("SelectPositions");
 
       Program.connectionQuery.CloseConnection();
     }
@@ -45,6 +43,43 @@ namespace CourseProject
       bankComboBox.DataSource = Program.connectionQuery.DataSet("SelectBanksWhereCity", commandParameters);
 
       Program.connectionQuery.CloseConnection();
+    }
+
+    private void addEmployeeButton_Click(object sender, EventArgs e)
+    {
+      Program.connectionQuery.OpenConnection();
+
+
+      SqlParameter[] commandParameters =
+      {
+        new SqlParameter() {ParameterName =  "@EmployeeName", SqlDbType = SqlDbType.NVarChar, Value = nameTextBox.Text},
+        new SqlParameter() {ParameterName = "@BankId", SqlDbType = SqlDbType.Int, Value = bankComboBox.SelectedValue},
+        new SqlParameter() {ParameterName =  "@EmployeeAddress", SqlDbType = SqlDbType.NVarChar, Value = addressTextBox.Text},
+        new SqlParameter() {ParameterName =  "@PassportNumber", SqlDbType = SqlDbType.NVarChar, Value = passportTextBox.Text},
+        new SqlParameter() {ParameterName =  "@Salary", SqlDbType = SqlDbType.Decimal, Value = salaryTextBox.Text},
+        new SqlParameter() {ParameterName =  "@PhoneNumber", SqlDbType = SqlDbType.VarChar, Value = phoneTextBox.Text},
+        new SqlParameter() {ParameterName =  "@UserName", SqlDbType = SqlDbType.VarChar, Value = userNameTextBox.Text},
+        new SqlParameter() {ParameterName =  "@Password", SqlDbType = SqlDbType.VarChar, Value = passwordTextBox.Text},
+        new SqlParameter() {ParameterName = "@PositionId", SqlDbType = SqlDbType.Int, Value = positionComboBox.SelectedValue},
+      };
+      Program.connectionQuery.ExecuteNonQuery("InsertEmployee", CommandType.StoredProcedure, commandParameters);
+
+      Program.connectionQuery.CloseConnection();
+    }
+
+    private void label5_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void salaryTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+    {
+
+    }
+
+    private void label6_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }
