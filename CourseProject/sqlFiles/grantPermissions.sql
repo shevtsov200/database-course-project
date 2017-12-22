@@ -29,3 +29,8 @@ GRANT EXECUTE ON dbo.SelectManagersRating TO db_hr;
 GRANT EXECUTE ON dbo.RegisterEmployee TO db_hr;
 GRANT EXECUTE ON dbo.SelectEmployees TO db_hr;
 GRANT EXECUTE ON dbo.DeleteEmployee TO db_hr;
+GRANT EXECUTE ON dbo.SelectEmployeeInformation TO db_hr;
+GRANT EXECUTE ON dbo.SelectClientInformation TO db_client;
+
+GRANT EXECUTE ON dbo.SelectClients TO db_manager;
+GRANT EXECUTE ON dbo.UpdateClient TO db_manager;

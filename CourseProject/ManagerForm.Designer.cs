@@ -56,11 +56,28 @@
       this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
       this.menuItem1 = new System.Windows.Forms.MenuItem();
       this.logoutMenu = new System.Windows.Forms.MenuItem();
+      this.updateClientPage = new System.Windows.Forms.TabPage();
+      this.updatePasswordTextBox = new System.Windows.Forms.TextBox();
+      this.updateUsernameTextBox = new System.Windows.Forms.TextBox();
+      this.label5 = new System.Windows.Forms.Label();
+      this.label6 = new System.Windows.Forms.Label();
+      this.label7 = new System.Windows.Forms.Label();
+      this.updatePhoneTextBox = new System.Windows.Forms.MaskedTextBox();
+      this.label8 = new System.Windows.Forms.Label();
+      this.updateCityComboBox = new System.Windows.Forms.ComboBox();
+      this.updateClientButton = new System.Windows.Forms.Button();
+      this.label11 = new System.Windows.Forms.Label();
+      this.label12 = new System.Windows.Forms.Label();
+      this.label13 = new System.Windows.Forms.Label();
+      this.updateAddressTextBox = new System.Windows.Forms.TextBox();
+      this.updatePassportTextBox = new System.Windows.Forms.MaskedTextBox();
+      this.updateNameComboBox = new System.Windows.Forms.ComboBox();
       this.tabControl1.SuspendLayout();
       this.addClientPage.SuspendLayout();
       this.viewFeedbackPage.SuspendLayout();
       this.viewFeedbackLayout.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.feedbackGrid)).BeginInit();
+      this.updateClientPage.SuspendLayout();
       this.SuspendLayout();
       // 
       // tabControl1
@@ -70,11 +87,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.tabControl1.Controls.Add(this.addClientPage);
       this.tabControl1.Controls.Add(this.viewFeedbackPage);
+      this.tabControl1.Controls.Add(this.updateClientPage);
       this.tabControl1.Location = new System.Drawing.Point(13, 13);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
       this.tabControl1.Size = new System.Drawing.Size(641, 441);
       this.tabControl1.TabIndex = 0;
+      this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
       // 
       // addClientPage
       // 
@@ -326,6 +345,164 @@
       this.logoutMenu.Text = "Log out";
       this.logoutMenu.Click += new System.EventHandler(this.logoutMenu_Click);
       // 
+      // updateClientPage
+      // 
+      this.updateClientPage.Controls.Add(this.updateNameComboBox);
+      this.updateClientPage.Controls.Add(this.updatePassportTextBox);
+      this.updateClientPage.Controls.Add(this.updatePasswordTextBox);
+      this.updateClientPage.Controls.Add(this.updateUsernameTextBox);
+      this.updateClientPage.Controls.Add(this.label5);
+      this.updateClientPage.Controls.Add(this.label6);
+      this.updateClientPage.Controls.Add(this.label7);
+      this.updateClientPage.Controls.Add(this.updatePhoneTextBox);
+      this.updateClientPage.Controls.Add(this.label8);
+      this.updateClientPage.Controls.Add(this.updateCityComboBox);
+      this.updateClientPage.Controls.Add(this.updateClientButton);
+      this.updateClientPage.Controls.Add(this.label11);
+      this.updateClientPage.Controls.Add(this.label12);
+      this.updateClientPage.Controls.Add(this.label13);
+      this.updateClientPage.Controls.Add(this.updateAddressTextBox);
+      this.updateClientPage.Location = new System.Drawing.Point(4, 22);
+      this.updateClientPage.Name = "updateClientPage";
+      this.updateClientPage.Size = new System.Drawing.Size(633, 415);
+      this.updateClientPage.TabIndex = 5;
+      this.updateClientPage.Text = "update client";
+      this.updateClientPage.UseVisualStyleBackColor = true;
+      // 
+      // updatePasswordTextBox
+      // 
+      this.updatePasswordTextBox.Location = new System.Drawing.Point(289, 54);
+      this.updatePasswordTextBox.Name = "updatePasswordTextBox";
+      this.updatePasswordTextBox.PasswordChar = '*';
+      this.updatePasswordTextBox.Size = new System.Drawing.Size(86, 20);
+      this.updatePasswordTextBox.TabIndex = 31;
+      this.updatePasswordTextBox.TextChanged += new System.EventHandler(this.updateTextBox_TextChanged);
+      // 
+      // updateUsernameTextBox
+      // 
+      this.updateUsernameTextBox.Location = new System.Drawing.Point(289, 15);
+      this.updateUsernameTextBox.Name = "updateUsernameTextBox";
+      this.updateUsernameTextBox.Size = new System.Drawing.Size(86, 20);
+      this.updateUsernameTextBox.TabIndex = 30;
+      this.updateUsernameTextBox.TextChanged += new System.EventHandler(this.updateTextBox_TextChanged);
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Location = new System.Drawing.Point(227, 54);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(52, 13);
+      this.label5.TabIndex = 29;
+      this.label5.Text = "password";
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(227, 15);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(56, 13);
+      this.label6.TabIndex = 28;
+      this.label6.Text = "user name";
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Location = new System.Drawing.Point(14, 164);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(37, 13);
+      this.label7.TabIndex = 26;
+      this.label7.Text = "phone";
+      // 
+      // updatePhoneTextBox
+      // 
+      this.updatePhoneTextBox.Location = new System.Drawing.Point(73, 164);
+      this.updatePhoneTextBox.Mask = "(999) 000-0000";
+      this.updatePhoneTextBox.Name = "updatePhoneTextBox";
+      this.updatePhoneTextBox.Size = new System.Drawing.Size(84, 20);
+      this.updatePhoneTextBox.TabIndex = 25;
+      this.updatePhoneTextBox.TextChanged += new System.EventHandler(this.updateTextBox_TextChanged);
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Location = new System.Drawing.Point(14, 54);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(47, 13);
+      this.label8.TabIndex = 24;
+      this.label8.Text = "passport";
+      // 
+      // updateCityComboBox
+      // 
+      this.updateCityComboBox.FormattingEnabled = true;
+      this.updateCityComboBox.Location = new System.Drawing.Point(73, 134);
+      this.updateCityComboBox.Name = "updateCityComboBox";
+      this.updateCityComboBox.Size = new System.Drawing.Size(148, 21);
+      this.updateCityComboBox.TabIndex = 23;
+      this.updateCityComboBox.TextChanged += new System.EventHandler(this.updateTextBox_TextChanged);
+      // 
+      // updateClientButton
+      // 
+      this.updateClientButton.Location = new System.Drawing.Point(17, 241);
+      this.updateClientButton.Name = "updateClientButton";
+      this.updateClientButton.Size = new System.Drawing.Size(100, 23);
+      this.updateClientButton.TabIndex = 22;
+      this.updateClientButton.Text = "update client";
+      this.updateClientButton.UseVisualStyleBackColor = true;
+      this.updateClientButton.Click += new System.EventHandler(this.updateClientButton_Click);
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(14, 98);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(44, 13);
+      this.label11.TabIndex = 21;
+      this.label11.Text = "address";
+      // 
+      // label12
+      // 
+      this.label12.AutoSize = true;
+      this.label12.Location = new System.Drawing.Point(14, 134);
+      this.label12.Name = "label12";
+      this.label12.Size = new System.Drawing.Size(23, 13);
+      this.label12.TabIndex = 20;
+      this.label12.Text = "city";
+      // 
+      // label13
+      // 
+      this.label13.AutoSize = true;
+      this.label13.Location = new System.Drawing.Point(14, 21);
+      this.label13.Name = "label13";
+      this.label13.Size = new System.Drawing.Size(33, 13);
+      this.label13.TabIndex = 19;
+      this.label13.Text = "name";
+      // 
+      // updateAddressTextBox
+      // 
+      this.updateAddressTextBox.Location = new System.Drawing.Point(73, 98);
+      this.updateAddressTextBox.Name = "updateAddressTextBox";
+      this.updateAddressTextBox.Size = new System.Drawing.Size(148, 20);
+      this.updateAddressTextBox.TabIndex = 18;
+      this.updateAddressTextBox.TextChanged += new System.EventHandler(this.updateTextBox_TextChanged);
+      // 
+      // updatePassportTextBox
+      // 
+      this.updatePassportTextBox.Location = new System.Drawing.Point(74, 54);
+      this.updatePassportTextBox.Mask = "00 00 000000";
+      this.updatePassportTextBox.Name = "updatePassportTextBox";
+      this.updatePassportTextBox.Size = new System.Drawing.Size(83, 20);
+      this.updatePassportTextBox.TabIndex = 32;
+      this.updatePassportTextBox.TextChanged += new System.EventHandler(this.updateTextBox_TextChanged);
+      // 
+      // updateNameComboBox
+      // 
+      this.updateNameComboBox.FormattingEnabled = true;
+      this.updateNameComboBox.Location = new System.Drawing.Point(73, 21);
+      this.updateNameComboBox.Name = "updateNameComboBox";
+      this.updateNameComboBox.Size = new System.Drawing.Size(84, 21);
+      this.updateNameComboBox.TabIndex = 33;
+      this.updateNameComboBox.SelectedIndexChanged += new System.EventHandler(this.updateNameComboBox_SelectedIndexChanged);
+      // 
       // ManagerForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,6 +521,8 @@
       this.viewFeedbackLayout.ResumeLayout(false);
       this.viewFeedbackLayout.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.feedbackGrid)).EndInit();
+      this.updateClientPage.ResumeLayout(false);
+      this.updateClientPage.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -377,5 +556,21 @@
     private System.Windows.Forms.MainMenu mainMenu1;
     private System.Windows.Forms.MenuItem menuItem1;
     private System.Windows.Forms.MenuItem logoutMenu;
+    private System.Windows.Forms.TabPage updateClientPage;
+    private System.Windows.Forms.TextBox updatePasswordTextBox;
+    private System.Windows.Forms.TextBox updateUsernameTextBox;
+    private System.Windows.Forms.Label label5;
+    private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.MaskedTextBox updatePhoneTextBox;
+    private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.ComboBox updateCityComboBox;
+    private System.Windows.Forms.Button updateClientButton;
+    private System.Windows.Forms.Label label11;
+    private System.Windows.Forms.Label label12;
+    private System.Windows.Forms.Label label13;
+    private System.Windows.Forms.TextBox updateAddressTextBox;
+    private System.Windows.Forms.MaskedTextBox updatePassportTextBox;
+    private System.Windows.Forms.ComboBox updateNameComboBox;
   }
 }

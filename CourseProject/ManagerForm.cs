@@ -133,5 +133,92 @@ namespace CourseProject
     {
       updateAddClientButton();
     }
+
+    private void maskedComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      switch ((sender as TabControl).SelectedIndex)
+      {
+        case 2:
+          updateCityComboBox.DisplayMember = "name";
+          updateCityComboBox.ValueMember = "city_id";
+          updateCityComboBox.DataSource = Program.connectionQuery.DataSet("SelectCities");
+
+          updateNameComboBox.DisplayMember = "name";
+          updateNameComboBox.ValueMember = "client_id";
+          updateNameComboBox.DataSource = Program.connectionQuery.DataSet("SelectClients");
+
+          updateClientFields();
+          break;
+      }
+    }
+
+    private void updateTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateUpdateClientButton();
+    }
+
+    private void updateUpdateClientButton()
+    {
+      bool isEmpty = string.IsNullOrEmpty(updateNameComboBox.Text)
+        || string.IsNullOrEmpty(updateAddressTextBox.Text)
+        || !updatePassportTextBox.MaskFull
+        || !updatePhoneTextBox.MaskFull
+        || string.IsNullOrEmpty(updateUsernameTextBox.Text)
+        || string.IsNullOrEmpty(updatePasswordTextBox.Text);
+
+      updateClientButton.Enabled = !isEmpty;
+    }
+
+    private void updateClientButton_Click(object sender, EventArgs e)
+    {
+      Program.connectionQuery.OpenConnection();
+
+      SqlParameter[] parameterList =
+      {
+        new SqlParameter() {ParameterName =  "@ClientId", SqlDbType = SqlDbType.Int, Value = updateNameComboBox.SelectedValue},
+        new SqlParameter() {ParameterName =  "@ClientName", SqlDbType = SqlDbType.NVarChar, Value = updateNameComboBox.Text},
+        new SqlParameter() {ParameterName =  "@ClientCityId", SqlDbType = SqlDbType.Int, Value = updateCityComboBox.SelectedValue },
+        new SqlParameter() {ParameterName =  "@ClientAddress", SqlDbType = SqlDbType.NVarChar, Value = updateAddressTextBox.Text},
+        new SqlParameter() {ParameterName =  "@PassportNumber", SqlDbType = SqlDbType.NVarChar, Value = updatePassportTextBox.Text},
+        new SqlParameter() {ParameterName =  "@PhoneNumber", SqlDbType = SqlDbType.VarChar, Value = updatePhoneTextBox.Text},
+        new SqlParameter() {ParameterName =  "@UserName", SqlDbType = SqlDbType.VarChar, Value = updateUsernameTextBox.Text},
+        new SqlParameter() {ParameterName =  "@Password", SqlDbType = SqlDbType.VarChar, Value = updatePasswordTextBox.Text}
+      };
+      Program.connectionQuery.ExecuteNonQuery("UpdateClient", CommandType.StoredProcedure, parameterList);
+
+      Program.connectionQuery.CloseConnection();
+    }
+
+    private void updateClientFields()
+    {
+      Program.connectionQuery.OpenConnection();
+      SqlParameter[] parameterList =
+      {
+            new SqlParameter() {ParameterName =  "@ClientId", SqlDbType = SqlDbType.Int, Value = updateNameComboBox.SelectedValue}
+          };
+
+      SqlDataReader reader = Program.connectionQuery.DataReader("SelectClientInformation", parameterList);
+      if (reader.Read())
+      {
+        updateNameComboBox.Text = reader["name"].ToString();
+        updateCityComboBox.SelectedValue = reader["city_id"].ToString();
+        updateAddressTextBox.Text = reader["client_address"].ToString();
+        updatePhoneTextBox.Text = reader["phone_number"].ToString();
+        updateUsernameTextBox.Text = reader["username"].ToString();
+        updatePasswordTextBox.Text = reader["client_password"].ToString();
+        updatePassportTextBox.Text = reader["passport_number"].ToString();
+      }
+      Program.connectionQuery.CloseConnection();
+    }
+
+    private void updateNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      updateClientFields();
+    }
   }
 }

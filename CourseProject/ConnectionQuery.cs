@@ -63,10 +63,17 @@ namespace CourseProject
       }
     }
 
-    public SqlDataReader DataReader(string query)
+    public SqlDataReader DataReader(string query, SqlParameter[] commandParameters = null)
     {
       SqlCommand cmd = new SqlCommand(query, dbConnection);
+      cmd.CommandType = CommandType.StoredProcedure;
+      if (commandParameters != null)
+      {
+        cmd.Parameters.AddRange(commandParameters);
+      }
+
       SqlDataReader dr = cmd.ExecuteReader();
+
       return dr;
     }
 

@@ -358,3 +358,61 @@ BEGIN
 	DELETE FROM Employees
 	WHERE employee_id = @EmployeeId
 END
+GO
+ALTER PROCEDURE SelectClientInformation
+(
+	@ClientId integer
+)
+AS
+BEGIN
+	SELECT *
+	FROM Clients
+	WHERE client_id = @ClientId
+END
+GO
+ALTER PROCEDURE SelectEmployeeInformation
+(
+	@EmployeeId integer
+)
+AS
+BEGIN
+	SELECT *
+	FROM Employees
+	WHERE employee_id = @EmployeeId
+END
+GO
+ALTER PROCEDURE SelectClients
+AS
+BEGIN
+	SELECT name, client_id
+	FROM Clients
+END
+GO
+CREATE PROCEDURE UpdateClient
+(
+	@ClientId int,
+	@ClientName nvarchar(40),
+	@ClientCityId integer,
+	@ClientAddress nvarchar(80),
+	@PassportNumber nvarchar(25),
+	@PhoneNumber varchar(20),
+	@UserName varchar(20),
+	@Password varchar(20)
+)
+As
+Begin
+	UPDATE Clients
+	SET name = @ClientName,
+		city_id = @ClientCityId,
+		client_address = @ClientAddress,
+		passport_number = @PassportNumber,
+		phone_number = @PhoneNumber,
+		username = @UserName,
+		client_password = @Password
+	WHERE client_id = @ClientId
+END
+	/*INSERT INTO Clients (name, city_id, client_address, passport_number, 
+		phone_number, username, client_password) 
+	VALUES (@ClientName, @ClientCityId, @ClientAddress, @PassportNumber, 
+		@PhoneNumber, @UserName, @Password)
+	EXEC RegisterClient @UserName, @Password*/
