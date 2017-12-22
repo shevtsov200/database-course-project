@@ -17,16 +17,15 @@ namespace CourseProject
       {
         new SqlParameter() { ParameterName = "@ReturnValue", SqlDbType = SqlDbType.VarChar, Direction = ParameterDirection.Output, Size = 256}
       };
-      usernameLabel.Text = Program.connectionQuery.ExecuteNonQueryWithOutput("SelectUserLogin", CommandType.StoredProcedure, "@ReturnValue", parameterList) as string;
-
-
+     
       Program.connectionQuery.CloseConnection();
 
       pageControl.SelectedIndexChanged += new EventHandler(showAccounts_SelectedIndexChanged);
 
       accountsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
       historyGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-      openBankAccountButton.Enabled = false;
+      updateCreateAccountButton();
+      updateTransferButton();
     }
 
     private void showAccounts_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,7 +33,7 @@ namespace CourseProject
       switch ((sender as TabControl).SelectedIndex)
       {
         case 0:
-        
+          updateCreateAccountButton();
           break;
         case 1:
           Program.connectionQuery.OpenConnection();
@@ -46,7 +45,7 @@ namespace CourseProject
           sourceAccountComboBox.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccountsNumbers");
           sourceAccountComboBox.ValueMember = "account_id";
           Program.connectionQuery.CloseConnection();
-          transferFundsButton.Enabled = false;
+          updateTransferButton();
           break;
         case 3:
           Program.connectionQuery.OpenConnection();
@@ -130,16 +129,6 @@ namespace CourseProject
       Program.connectionQuery.CloseConnection();
     }
 
-    private bool checkIfClientExists(string passportNumber)
-    {
-      SqlCommand checkClientCmd = new SqlCommand("SelectClientsWithPassport", dbConnection);
-      checkClientCmd.CommandType = CommandType.StoredProcedure;
-      checkClientCmd.Parameters.Add("@PassportNumber", SqlDbType.NVarChar).Value = passportNumber;
-
-      int clientCount = (int)checkClientCmd.ExecuteScalar();
-      return (clientCount > 0);
-    }
-
     private void transferFundsButton_Click(object sender, EventArgs e)
     {
       SqlParameter[] parameterList =
@@ -221,13 +210,13 @@ namespace CourseProject
     private void updateTransferButton()
     {
       bool isEmpty = string.IsNullOrWhiteSpace(destinationAccountTextBox.Text)
-        || string.IsNullOrWhiteSpace(amountTextBox.Text);
+        || !amountTextBox.MaskFull;
       transferFundsButton.Enabled = !isEmpty;
     }
 
     private void updateCreateAccountButton()
     {
-      bool isEmpty = string.IsNullOrWhiteSpace(interestTextBox.Text);
+      bool isEmpty = !interestTextBox.MaskFull;
       openBankAccountButton.Enabled = !isEmpty;
     }
 

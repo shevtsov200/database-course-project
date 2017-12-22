@@ -96,8 +96,8 @@ namespace CourseProject
     {
       bool isEmpty = string.IsNullOrEmpty(name.Text)
         || string.IsNullOrEmpty(address.Text)
-        || string.IsNullOrEmpty(passport.Text)
-        || string.IsNullOrEmpty(phoneTextBox.Text)
+        || !passport.MaskFull
+        || !phoneTextBox.MaskFull
         || string.IsNullOrEmpty(userNameTextBox.Text)
         || string.IsNullOrEmpty(passwordTextBox.Text);
 

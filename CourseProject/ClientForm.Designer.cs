@@ -53,8 +53,6 @@
       this.sendFeedbackButton = new System.Windows.Forms.Button();
       this.feedbackTextBox = new System.Windows.Forms.TextBox();
       this.dbConnection = new System.Data.SqlClient.SqlConnection();
-      this.label11 = new System.Windows.Forms.Label();
-      this.usernameLabel = new System.Windows.Forms.Label();
       this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
       this.menuItem1 = new System.Windows.Forms.MenuItem();
       this.menuItem2 = new System.Windows.Forms.MenuItem();
@@ -194,9 +192,9 @@
       // amountTextBox
       // 
       this.amountTextBox.Location = new System.Drawing.Point(132, 71);
-      this.amountTextBox.Mask = "0000000000";
+      this.amountTextBox.Mask = "000000";
       this.amountTextBox.Name = "amountTextBox";
-      this.amountTextBox.Size = new System.Drawing.Size(67, 20);
+      this.amountTextBox.Size = new System.Drawing.Size(51, 20);
       this.amountTextBox.TabIndex = 5;
       this.amountTextBox.TextChanged += new System.EventHandler(this.amountTextBox_TextChanged);
       // 
@@ -317,29 +315,6 @@
       // 
       this.dbConnection.FireInfoMessageEventOnUserErrors = false;
       // 
-      // label11
-      // 
-      this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-      this.label11.AutoSize = true;
-      this.label11.Location = new System.Drawing.Point(16, 323);
-      this.label11.Name = "label11";
-      this.label11.Size = new System.Drawing.Size(66, 13);
-      this.label11.TabIndex = 9;
-      this.label11.Text = "current user:";
-      // 
-      // usernameLabel
-      // 
-      this.usernameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-      this.usernameLabel.AutoSize = true;
-      this.usernameLabel.Location = new System.Drawing.Point(89, 323);
-      this.usernameLabel.Name = "usernameLabel";
-      this.usernameLabel.Size = new System.Drawing.Size(79, 13);
-      this.usernameLabel.TabIndex = 10;
-      this.usernameLabel.Text = "usernameLabel";
-      this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
-      // 
       // mainMenu1
       // 
       this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
@@ -363,8 +338,6 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(485, 347);
-      this.Controls.Add(this.usernameLabel);
-      this.Controls.Add(this.label11);
       this.Controls.Add(this.pageControl);
       this.Menu = this.mainMenu1;
       this.Name = "ClientForm";
@@ -382,7 +355,6 @@
       this.LeaveFeedback.ResumeLayout(false);
       this.LeaveFeedback.PerformLayout();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 
@@ -401,8 +373,6 @@
     private System.Data.SqlClient.SqlConnection dbConnection;
     private System.Windows.Forms.TabPage showAccounts;
     private System.Windows.Forms.DataGridView accountsGrid;
-    private System.Windows.Forms.Label label11;
-    private System.Windows.Forms.Label usernameLabel;
     private System.Windows.Forms.MaskedTextBox destinationAccountTextBox;
     private System.Windows.Forms.ComboBox sourceAccountComboBox;
     private System.Windows.Forms.TabPage historyPage;

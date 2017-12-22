@@ -142,7 +142,6 @@ BEGIN
 
 	BEGIN TRANSACTION
 
-
 	UPDATE BankAccounts
 	SET balance = balance - @amount
 	WHERE account_id = @sourceId
@@ -155,13 +154,13 @@ BEGIN
 
 	SET @destinationCount = @@ROWCOUNT
 
-	IF @destinationCount = @sourceCount
+	IF (SELECT balance FROM BankAccounts WHERE account_id = @sourceId) < @amount
+		ROLLBACK
+	ELSE IF @destinationCount = @sourceCount
 	BEGIN
 		COMMIT
 		exec insertTransactionToHistory @sourceId, @destinationId, @amount
 	END
-	IF (SELECT balance FROM BankAccounts WHERE account_id = @sourceId) < @amount
-		ROLLBACK
 	ELSE
 		ROLLBACK
 END

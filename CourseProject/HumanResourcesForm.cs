@@ -135,12 +135,12 @@ namespace CourseProject
     private void updateAddEmployeeButton()
     {
       bool isEmpty = string.IsNullOrEmpty(nameTextBox.Text)
-        || string.IsNullOrEmpty(salaryTextBox.Text)
+        || !salaryTextBox.MaskFull
         || string.IsNullOrEmpty(userNameTextBox.Text)
-        || string.IsNullOrEmpty(passportTextBox.Text)
+        || !passportTextBox.MaskFull
         || string.IsNullOrEmpty(addressTextBox.Text)
-        || string.IsNullOrEmpty(passportTextBox.Text)
-        || string.IsNullOrEmpty(phoneTextBox.Text);
+        || !phoneTextBox.MaskFull
+        || string.IsNullOrEmpty(passwordTextBox.Text);
       addEmployeeButton.Enabled = !isEmpty;
     }
 
