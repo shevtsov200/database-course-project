@@ -138,8 +138,10 @@
       // 
       this.passwordTextBox.Location = new System.Drawing.Point(69, 209);
       this.passwordTextBox.Name = "passwordTextBox";
+      this.passwordTextBox.PasswordChar = '*';
       this.passwordTextBox.Size = new System.Drawing.Size(86, 20);
       this.passwordTextBox.TabIndex = 26;
+      this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBox_TextChanged);
       // 
       // addEmployeeButton
       // 
@@ -157,6 +159,7 @@
       this.userNameTextBox.Name = "userNameTextBox";
       this.userNameTextBox.Size = new System.Drawing.Size(86, 20);
       this.userNameTextBox.TabIndex = 25;
+      this.userNameTextBox.TextChanged += new System.EventHandler(this.userNameTextBox_TextChanged);
       // 
       // salaryLabel
       // 
@@ -184,6 +187,7 @@
       this.salaryTextBox.Size = new System.Drawing.Size(61, 20);
       this.salaryTextBox.TabIndex = 6;
       this.salaryTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.salaryTextBox_MaskInputRejected);
+      this.salaryTextBox.TextChanged += new System.EventHandler(this.salaryTextBox_TextChanged);
       // 
       // label9
       // 
@@ -200,6 +204,7 @@
       this.nameTextBox.Name = "nameTextBox";
       this.nameTextBox.Size = new System.Drawing.Size(121, 20);
       this.nameTextBox.TabIndex = 5;
+      this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
       // 
       // passportTextBox
       // 
@@ -208,6 +213,7 @@
       this.passportTextBox.Name = "passportTextBox";
       this.passportTextBox.Size = new System.Drawing.Size(83, 20);
       this.passportTextBox.TabIndex = 22;
+      this.passportTextBox.TextChanged += new System.EventHandler(this.passportTextBox_TextChanged);
       // 
       // label3
       // 
@@ -243,6 +249,7 @@
       this.phoneTextBox.Name = "phoneTextBox";
       this.phoneTextBox.Size = new System.Drawing.Size(84, 20);
       this.phoneTextBox.TabIndex = 20;
+      this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
       // 
       // label1
       // 
@@ -295,6 +302,7 @@
       this.addressTextBox.Name = "addressTextBox";
       this.addressTextBox.Size = new System.Drawing.Size(148, 20);
       this.addressTextBox.TabIndex = 17;
+      this.addressTextBox.TextChanged += new System.EventHandler(this.addressTextBox_TextChanged);
       // 
       // ratingPage
       // 

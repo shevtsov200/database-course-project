@@ -30,12 +30,10 @@
     {
       this.components = new System.ComponentModel.Container();
       this.pageControl = new System.Windows.Forms.TabControl();
-      this.tabPage2 = new System.Windows.Forms.TabPage();
-      this.button2 = new System.Windows.Forms.Button();
+      this.openAccountPage = new System.Windows.Forms.TabPage();
+      this.openBankAccountButton = new System.Windows.Forms.Button();
       this.interestTextBox = new System.Windows.Forms.MaskedTextBox();
       this.label5 = new System.Windows.Forms.Label();
-      this.openAccountPassport = new System.Windows.Forms.MaskedTextBox();
-      this.openAccountPassportLabel = new System.Windows.Forms.Label();
       this.showAccounts = new System.Windows.Forms.TabPage();
       this.accountsGrid = new System.Windows.Forms.DataGridView();
       this.makeTransactionPage = new System.Windows.Forms.TabPage();
@@ -61,7 +59,7 @@
       this.menuItem1 = new System.Windows.Forms.MenuItem();
       this.menuItem2 = new System.Windows.Forms.MenuItem();
       this.pageControl.SuspendLayout();
-      this.tabPage2.SuspendLayout();
+      this.openAccountPage.SuspendLayout();
       this.showAccounts.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.accountsGrid)).BeginInit();
       this.makeTransactionPage.SuspendLayout();
@@ -72,86 +70,67 @@
       // 
       // pageControl
       // 
-      this.pageControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.pageControl.Controls.Add(this.tabPage2);
+      this.pageControl.Controls.Add(this.openAccountPage);
       this.pageControl.Controls.Add(this.showAccounts);
       this.pageControl.Controls.Add(this.makeTransactionPage);
       this.pageControl.Controls.Add(this.historyPage);
       this.pageControl.Controls.Add(this.LeaveFeedback);
-      this.pageControl.Location = new System.Drawing.Point(12, 12);
+      this.pageControl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pageControl.Location = new System.Drawing.Point(0, 0);
       this.pageControl.Name = "pageControl";
       this.pageControl.SelectedIndex = 0;
-      this.pageControl.Size = new System.Drawing.Size(461, 308);
+      this.pageControl.Size = new System.Drawing.Size(485, 347);
       this.pageControl.TabIndex = 8;
+      this.pageControl.SelectedIndexChanged += new System.EventHandler(this.showAccounts_SelectedIndexChanged);
       // 
-      // tabPage2
+      // openAccountPage
       // 
-      this.tabPage2.Controls.Add(this.button2);
-      this.tabPage2.Controls.Add(this.interestTextBox);
-      this.tabPage2.Controls.Add(this.label5);
-      this.tabPage2.Controls.Add(this.openAccountPassport);
-      this.tabPage2.Controls.Add(this.openAccountPassportLabel);
-      this.tabPage2.Location = new System.Drawing.Point(4, 22);
-      this.tabPage2.Name = "tabPage2";
-      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(453, 282);
-      this.tabPage2.TabIndex = 1;
-      this.tabPage2.Text = "open account";
-      this.tabPage2.UseVisualStyleBackColor = true;
-      this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+      this.openAccountPage.Controls.Add(this.openBankAccountButton);
+      this.openAccountPage.Controls.Add(this.interestTextBox);
+      this.openAccountPage.Controls.Add(this.label5);
+      this.openAccountPage.Location = new System.Drawing.Point(4, 22);
+      this.openAccountPage.Name = "openAccountPage";
+      this.openAccountPage.Padding = new System.Windows.Forms.Padding(3);
+      this.openAccountPage.Size = new System.Drawing.Size(477, 321);
+      this.openAccountPage.TabIndex = 1;
+      this.openAccountPage.Text = "open account";
+      this.openAccountPage.UseVisualStyleBackColor = true;
+      this.openAccountPage.Click += new System.EventHandler(this.tabPage2_Click);
       // 
-      // button2
+      // openBankAccountButton
       // 
-      this.button2.Location = new System.Drawing.Point(72, 116);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(75, 44);
-      this.button2.TabIndex = 9;
-      this.button2.Text = "open bank account";
-      this.button2.UseVisualStyleBackColor = true;
-      this.button2.Click += new System.EventHandler(this.button2_Click);
+      this.openBankAccountButton.Location = new System.Drawing.Point(15, 40);
+      this.openBankAccountButton.Name = "openBankAccountButton";
+      this.openBankAccountButton.Size = new System.Drawing.Size(87, 44);
+      this.openBankAccountButton.TabIndex = 9;
+      this.openBankAccountButton.Text = "open bank account";
+      this.openBankAccountButton.UseVisualStyleBackColor = true;
+      this.openBankAccountButton.Click += new System.EventHandler(this.button2_Click);
       // 
       // interestTextBox
       // 
-      this.interestTextBox.Location = new System.Drawing.Point(72, 64);
+      this.interestTextBox.Location = new System.Drawing.Point(59, 14);
       this.interestTextBox.Mask = "00.00%";
       this.interestTextBox.Name = "interestTextBox";
       this.interestTextBox.Size = new System.Drawing.Size(43, 20);
       this.interestTextBox.TabIndex = 8;
+      this.interestTextBox.TextChanged += new System.EventHandler(this.interestTextBox_TextChanged);
       // 
       // label5
       // 
       this.label5.AutoSize = true;
-      this.label5.Location = new System.Drawing.Point(21, 61);
+      this.label5.Location = new System.Drawing.Point(12, 14);
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(41, 13);
       this.label5.TabIndex = 6;
       this.label5.Text = "interest";
-      // 
-      // openAccountPassport
-      // 
-      this.openAccountPassport.Location = new System.Drawing.Point(72, 23);
-      this.openAccountPassport.Mask = "00 00 000000";
-      this.openAccountPassport.Name = "openAccountPassport";
-      this.openAccountPassport.Size = new System.Drawing.Size(74, 20);
-      this.openAccountPassport.TabIndex = 3;
-      // 
-      // openAccountPassportLabel
-      // 
-      this.openAccountPassportLabel.AutoSize = true;
-      this.openAccountPassportLabel.Location = new System.Drawing.Point(18, 23);
-      this.openAccountPassportLabel.Name = "openAccountPassportLabel";
-      this.openAccountPassportLabel.Size = new System.Drawing.Size(47, 13);
-      this.openAccountPassportLabel.TabIndex = 0;
-      this.openAccountPassportLabel.Text = "passport";
       // 
       // showAccounts
       // 
       this.showAccounts.Controls.Add(this.accountsGrid);
       this.showAccounts.Location = new System.Drawing.Point(4, 22);
       this.showAccounts.Name = "showAccounts";
-      this.showAccounts.Size = new System.Drawing.Size(453, 282);
+      this.showAccounts.Size = new System.Drawing.Size(477, 321);
       this.showAccounts.TabIndex = 3;
       this.showAccounts.Text = "show accounts";
       this.showAccounts.UseVisualStyleBackColor = true;
@@ -180,7 +159,7 @@
       this.makeTransactionPage.Controls.Add(this.label6);
       this.makeTransactionPage.Location = new System.Drawing.Point(4, 22);
       this.makeTransactionPage.Name = "makeTransactionPage";
-      this.makeTransactionPage.Size = new System.Drawing.Size(453, 282);
+      this.makeTransactionPage.Size = new System.Drawing.Size(477, 321);
       this.makeTransactionPage.TabIndex = 2;
       this.makeTransactionPage.Text = "make transaction";
       this.makeTransactionPage.UseVisualStyleBackColor = true;
@@ -188,18 +167,19 @@
       // sourceAccountComboBox
       // 
       this.sourceAccountComboBox.FormattingEnabled = true;
-      this.sourceAccountComboBox.Location = new System.Drawing.Point(29, 21);
+      this.sourceAccountComboBox.Location = new System.Drawing.Point(132, 6);
       this.sourceAccountComboBox.Name = "sourceAccountComboBox";
-      this.sourceAccountComboBox.Size = new System.Drawing.Size(121, 21);
+      this.sourceAccountComboBox.Size = new System.Drawing.Size(75, 21);
       this.sourceAccountComboBox.TabIndex = 10;
+      this.sourceAccountComboBox.TextUpdate += new System.EventHandler(this.sourceAccountComboBox_TextUpdate);
       // 
       // destinationAccountTextBox
       // 
-      this.destinationAccountTextBox.Location = new System.Drawing.Point(211, 23);
-      this.destinationAccountTextBox.Mask = "0000 0000 0000 0000";
+      this.destinationAccountTextBox.Location = new System.Drawing.Point(132, 40);
       this.destinationAccountTextBox.Name = "destinationAccountTextBox";
-      this.destinationAccountTextBox.Size = new System.Drawing.Size(116, 20);
+      this.destinationAccountTextBox.Size = new System.Drawing.Size(51, 20);
       this.destinationAccountTextBox.TabIndex = 9;
+      this.destinationAccountTextBox.TextChanged += new System.EventHandler(this.destinationAccountTextBox_TextChanged);
       // 
       // transferFundsButton
       // 
@@ -213,16 +193,17 @@
       // 
       // amountTextBox
       // 
-      this.amountTextBox.Location = new System.Drawing.Point(348, 23);
+      this.amountTextBox.Location = new System.Drawing.Point(132, 71);
       this.amountTextBox.Mask = "0000000000";
       this.amountTextBox.Name = "amountTextBox";
       this.amountTextBox.Size = new System.Drawing.Size(67, 20);
       this.amountTextBox.TabIndex = 5;
+      this.amountTextBox.TextChanged += new System.EventHandler(this.amountTextBox_TextChanged);
       // 
       // label8
       // 
       this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(345, 7);
+      this.label8.Location = new System.Drawing.Point(26, 71);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(42, 13);
       this.label8.TabIndex = 4;
@@ -231,7 +212,7 @@
       // label7
       // 
       this.label7.AutoSize = true;
-      this.label7.Location = new System.Drawing.Point(208, 7);
+      this.label7.Location = new System.Drawing.Point(26, 43);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(100, 13);
       this.label7.TabIndex = 3;
@@ -252,7 +233,7 @@
       this.historyPage.Location = new System.Drawing.Point(4, 22);
       this.historyPage.Name = "historyPage";
       this.historyPage.Padding = new System.Windows.Forms.Padding(3);
-      this.historyPage.Size = new System.Drawing.Size(453, 282);
+      this.historyPage.Size = new System.Drawing.Size(477, 321);
       this.historyPage.TabIndex = 4;
       this.historyPage.Text = "transaction history";
       this.historyPage.UseVisualStyleBackColor = true;
@@ -265,7 +246,7 @@
       this.historyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.historyGrid.Location = new System.Drawing.Point(7, 7);
       this.historyGrid.Name = "historyGrid";
-      this.historyGrid.Size = new System.Drawing.Size(440, 269);
+      this.historyGrid.Size = new System.Drawing.Size(464, 308);
       this.historyGrid.TabIndex = 0;
       this.historyGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
       // 
@@ -278,7 +259,7 @@
       this.LeaveFeedback.Controls.Add(this.feedbackTextBox);
       this.LeaveFeedback.Location = new System.Drawing.Point(4, 22);
       this.LeaveFeedback.Name = "LeaveFeedback";
-      this.LeaveFeedback.Size = new System.Drawing.Size(453, 282);
+      this.LeaveFeedback.Size = new System.Drawing.Size(477, 321);
       this.LeaveFeedback.TabIndex = 5;
       this.LeaveFeedback.Text = "leave feedback";
       this.LeaveFeedback.UseVisualStyleBackColor = true;
@@ -387,11 +368,11 @@
       this.Controls.Add(this.pageControl);
       this.Menu = this.mainMenu1;
       this.Name = "ClientForm";
-      this.Text = "Form1";
+      this.Text = "Client Form";
       this.Load += new System.EventHandler(this.Form1_Load);
       this.pageControl.ResumeLayout(false);
-      this.tabPage2.ResumeLayout(false);
-      this.tabPage2.PerformLayout();
+      this.openAccountPage.ResumeLayout(false);
+      this.openAccountPage.PerformLayout();
       this.showAccounts.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.accountsGrid)).EndInit();
       this.makeTransactionPage.ResumeLayout(false);
@@ -407,12 +388,10 @@
 
     #endregion
     private System.Windows.Forms.TabControl pageControl;
-    private System.Windows.Forms.TabPage tabPage2;
-    private System.Windows.Forms.Label openAccountPassportLabel;
-    private System.Windows.Forms.MaskedTextBox openAccountPassport;
+    private System.Windows.Forms.TabPage openAccountPage;
     private System.Windows.Forms.MaskedTextBox interestTextBox;
     private System.Windows.Forms.Label label5;
-    private System.Windows.Forms.Button button2;
+    private System.Windows.Forms.Button openBankAccountButton;
     private System.Windows.Forms.TabPage makeTransactionPage;
     private System.Windows.Forms.MaskedTextBox amountTextBox;
     private System.Windows.Forms.Label label8;

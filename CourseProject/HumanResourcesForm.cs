@@ -23,6 +23,7 @@ namespace CourseProject
       positionComboBox.DataSource = Program.connectionQuery.DataSet("SelectPositions");
 
       Program.connectionQuery.CloseConnection();
+      addEmployeeButton.Enabled = false;
     }
 
     private void CityComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -129,6 +130,53 @@ namespace CourseProject
           repopulateEmployeeComboBox();
           break;
       }
+    }
+
+    private void updateAddEmployeeButton()
+    {
+      bool isEmpty = string.IsNullOrEmpty(nameTextBox.Text)
+        || string.IsNullOrEmpty(salaryTextBox.Text)
+        || string.IsNullOrEmpty(userNameTextBox.Text)
+        || string.IsNullOrEmpty(passportTextBox.Text)
+        || string.IsNullOrEmpty(addressTextBox.Text)
+        || string.IsNullOrEmpty(passportTextBox.Text)
+        || string.IsNullOrEmpty(phoneTextBox.Text);
+      addEmployeeButton.Enabled = !isEmpty;
+    }
+
+    private void nameTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
+    }
+
+    private void salaryTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
+    }
+
+    private void userNameTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
+    }
+
+    private void passwordTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
+    }
+
+    private void addressTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
+    }
+
+    private void passportTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
+    }
+
+    private void phoneTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddEmployeeButton();
     }
   }
 }

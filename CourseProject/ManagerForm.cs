@@ -22,6 +22,7 @@ namespace CourseProject
       Program.connectionQuery.CloseConnection();
 
       feedbackGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+      updateAddClientButton();
     }
 
     private void addEmployeePage_Click(object sender, EventArgs e)
@@ -89,6 +90,48 @@ namespace CourseProject
     {
       Program.loginForm.Show();
       Close();
+    }
+
+    private void updateAddClientButton()
+    {
+      bool isEmpty = string.IsNullOrEmpty(name.Text)
+        || string.IsNullOrEmpty(address.Text)
+        || string.IsNullOrEmpty(passport.Text)
+        || string.IsNullOrEmpty(phoneTextBox.Text)
+        || string.IsNullOrEmpty(userNameTextBox.Text)
+        || string.IsNullOrEmpty(passwordTextBox.Text);
+
+      addClientButton.Enabled = !isEmpty;
+    }
+
+    private void name_TextChanged(object sender, EventArgs e)
+    {
+      updateAddClientButton();
+    }
+
+    private void address_TextChanged(object sender, EventArgs e)
+    {
+      updateAddClientButton();
+    }
+
+    private void passport_TextChanged(object sender, EventArgs e)
+    {
+      updateAddClientButton();
+    }
+
+    private void phoneTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddClientButton();
+    }
+
+    private void userNameTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddClientButton();
+    }
+
+    private void passwordTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateAddClientButton();
     }
   }
 }

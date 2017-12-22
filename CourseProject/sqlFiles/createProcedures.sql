@@ -1,7 +1,8 @@
-use CourseProject;
+﻿use CourseProject;
 
-go
-Alter Procedure InsertClient
+GO
+-- Добавить клиента
+ALTER PROCEDURE InsertClient
 (
 	@ClientName nvarchar(40),
 	@ClientCityId integer,
@@ -20,6 +21,7 @@ Begin
 	EXEC RegisterClient @UserName, @Password
 End
 GO
+-- Получить id клиента, который соединён с базой
 ALTER PROCEDURE SelectCurrentClient
 (
 	@ReturnValue integer OUTPUT
@@ -32,6 +34,7 @@ BEGIN
 		WHERE clients.username = SUSER_NAME(SUSER_ID()))
 END
 go
+-- Добавить банковский аккаунт
 Alter Procedure InsertBankAccount
 (
 	@Interest decimal(7,4)
@@ -42,31 +45,10 @@ Begin
 	exec SelectCurrentClient @ClientId OUTPUT
 	
 	INSERT INTO BankAccounts (client_id,balance,interest)
-	VALUES (@ClientId, 0, @Interest)
+	VALUES (@ClientId, 15000, @Interest)
 End
 GO
-Alter Procedure SelectClientsWithPassport
-(
-	@PassportNumber nvarchar(25)
-)
-As
-Begin
-	SELECT count(*) FROM Clients WHERE CLients.passport_number = @PassportNumber
-End
-GO
-Alter Procedure InsertBankAccountUsingPassport
-(
-	@PassportNumber nvarchar(25),
-	@Interest decimal(7,4)
-)
-As
-Begin
-	DECLARE @ClientId integer
-
-	SELECT @ClientId = Clients.client_id FROM Clients WHERE Clients.passport_number = @PassportNumber
-	EXEC InsertBankAccount @ClientId,@Interest
-End
-GO
+-- Зарегистрировать клиента в базе данных
 ALTER PROCEDURE RegisterClient
 (
 	@UserName varchar(20),
@@ -85,6 +67,7 @@ BEGIN
 	execute(@SQL);
 END
 GO
+-- Зарегистрировать сотрудника в базе данных
 ALTER Procedure RegisterEmployee
 (
 	@UserName nvarchar(20),
@@ -101,13 +84,10 @@ Begin
    set @SQL = 'create user ' + @UserName + ' for login ' +
 				@UserName 
 				+ '; exec sp_addrolemember '+ ''''+ @Role + '''' +',''' + @UserName + ''';' 
-				--+ ' exec sp_addsrvrolemember '+ @UserName +',''setupadmin'';'
-				--+ ' exec sp_addrolemember '+ '''db_securityadmin'''+',''' + @UserName + ''';'
-				--+ ' exec sp_addrolemember '+ '''db_accessadmin'''+',''' + @UserName + ''';'
-				--+ ' exec sp_addsrvrolemember '+ @UserName +',''securityadmin'';'  
 	execute(@SQL);
-ENd
+END
 GO
+-- Получить роль пользователя, соединённого с базой данных
 ALTER PROCEDURE SelectUserRole
 (
 	@UserName nvarchar(20),
@@ -124,6 +104,7 @@ BEGIN
 	WHERE members.NAME = @UserName and roles.NAME in ('db_client', 'db_manager', 'db_hr'))
 END
 GO
+-- Получить логин пользователя, соединённого с базой данных
 ALTER PROCEDURE SelectUserLogin
 (
 	@ReturnValue nvarchar(256) OUTPUT
@@ -133,10 +114,11 @@ BEGIN
 	SET @ReturnValue = (SELECT suser_sname())
 END
 GO
+-- Получить все банковские счета клиента, соединённого с базой данных
 ALTER PROCEDURE SelectUserBankAccounts
 AS
 BEGIN
-	SELECT *
+	SELECT account_id, balance, interest
 	FROM BankAccounts
 	WHERE BankAccounts.client_id = (
 	SELECT client_id
@@ -144,6 +126,7 @@ BEGIN
 	WHERE clients.username = SUSER_NAME(SUSER_ID()))
 END
 GO
+-- Совершить транзакцию
 ALTER PROCEDURE TransferFunds
 (
 @sourceId INT, 
@@ -154,7 +137,12 @@ AS
 BEGIN
 	DECLARE @sourceCount INT, @destinationCount INT
 	
+	IF (SELECT balance FROM BankAccounts WHERE account_id = @sourceId) < @amount
+		RETURN
+
 	BEGIN TRANSACTION
+
+
 	UPDATE BankAccounts
 	SET balance = balance - @amount
 	WHERE account_id = @sourceId
@@ -172,10 +160,13 @@ BEGIN
 		COMMIT
 		exec insertTransactionToHistory @sourceId, @destinationId, @amount
 	END
+	IF (SELECT balance FROM BankAccounts WHERE account_id = @sourceId) < @amount
+		ROLLBACK
 	ELSE
 		ROLLBACK
 END
 GO
+-- Получить id всех банковских счетов клиента, соединённого с базой данных
 ALTER PROCEDURE SelectUserBankAccountsNumbers
 AS
 BEGIN
@@ -187,6 +178,7 @@ BEGIN
 	WHERE clients.username = SUSER_NAME(SUSER_ID()))
 END
 GO
+-- Получить города
 ALTER PROCEDURE SelectCities
 AS
 BEGIN
@@ -194,6 +186,7 @@ BEGIN
 	FROM Cities
 END
 GO
+-- Получить все банки в городе
 ALTER PROCEDURE SelectBanksWhereCity
 (
 @cityId integer
@@ -205,6 +198,7 @@ BEGIN
 	WHERE Banks.city_id = @cityId
 END
 GO
+-- Добавить сотрудника в базу данных
 ALTER PROCEDURE InsertEmployee
 (
 	@EmployeeName nvarchar(40),
@@ -237,6 +231,7 @@ Begin
 	EXEC RegisterEmployee @UserName, @Password, @RoleName
 End
 GO
+-- Получить все должности
 ALTER PROCEDURE SelectPositions
 AS
 BEGIN
@@ -244,6 +239,7 @@ BEGIN
 	FROM Positions
 END
 GO
+-- Получить исторю транзакций пользователя, соединённого с базой данных
 ALTER PROCEDURE SelectUserTransactions
 AS
 BEGIN
@@ -253,7 +249,7 @@ BEGIN
 		FROM Clients
 		WHERE clients.username = SUSER_NAME(SUSER_ID()))
 
-	select source_id, c1.name,  destination_id, c2.name, amount 
+	select source_id, c1.name as 'sender name',  destination_id, c2.name as 'recipient name', amount 
 	from Transactions t
 	inner join BankAccounts t1 on t1.account_id = source_id
 	inner join BankAccounts t2 on t2.account_id = destination_id
@@ -262,6 +258,7 @@ BEGIN
 	WHERE t1.client_id = @ClientId OR t2.client_id = @ClientId
 END
 GO
+-- Добавить транзакцию в историю транзакций
 ALTER PROCEDURE InsertTransactionToHistory
 (
 	@SourceId integer,
@@ -274,6 +271,7 @@ BEGIN
 	VALUES (@SourceId, @DestinationId, @Amount)
 END
 GO
+-- Получить всех менеджеров
 ALTER PROCEDURE SelectManagers
 AS
 BEGIN
@@ -282,6 +280,7 @@ BEGIN
 	WHERE Employees.position_id = 1
 END
 GO
+-- Добавить отзыв в базу данных
 ALTER PROCEDURE InsertFeedback
 (
 	@ManagerId integer,
@@ -300,6 +299,7 @@ BEGIN
 	VALUES (@ManagerId, @FeedbackText, @Rating, @ClientId,@CurrentDate) 
 END
 GO
+-- Получить id менеджера, соединённого с базой данных
 ALTER PROCEDURE SelectCurrentManager
 (
 	@ReturnValue integer OUTPUT
@@ -312,6 +312,7 @@ BEGIN
 		WHERE username = SUSER_NAME(SUSER_ID()))
 END
 GO
+-- Получить все отызвы о менеджере, соединённом с базой данных
 ALTER PROCEDURE SelectCurrentManagerFeedback
 AS
 BEGIN
@@ -324,10 +325,11 @@ BEGIN
 	WHERE manager_id = @ManagerId
 END
 GO
+-- Получить менеджеров и суммарный рейтинг для каждого
 ALTER PROCEDURE SelectManagersRating
 AS
 BEGIN
-	SELECT name, ISNULL(t.rating,0)
+	SELECT name, ISNULL(t.rating,0) as rating
 	FROM Employees
 	JOIN
 	(SELECT employee_id, sum(rating) as rating
@@ -339,6 +341,7 @@ BEGIN
 	ORDER BY t.rating DESC
 END
 GO
+-- Получить всех сотрудников
 ALTER PROCEDURE SelectEmployees
 AS
 BEGIN
@@ -346,6 +349,7 @@ BEGIN
 	FROM Employees
 END
 GO
+-- Уволить сотрудника
 ALTER PROCEDURE DeleteEmployee
 (
 	@EmployeeId integer

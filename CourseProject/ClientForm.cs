@@ -26,12 +26,16 @@ namespace CourseProject
 
       accountsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
       historyGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+      openBankAccountButton.Enabled = false;
     }
 
     private void showAccounts_SelectedIndexChanged(object sender, EventArgs e)
     {
       switch ((sender as TabControl).SelectedIndex)
       {
+        case 0:
+        
+          break;
         case 1:
           Program.connectionQuery.OpenConnection();
           accountsGrid.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccounts");
@@ -42,6 +46,7 @@ namespace CourseProject
           sourceAccountComboBox.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccountsNumbers");
           sourceAccountComboBox.ValueMember = "account_id";
           Program.connectionQuery.CloseConnection();
+          transferFundsButton.Enabled = false;
           break;
         case 3:
           Program.connectionQuery.OpenConnection();
@@ -207,6 +212,38 @@ namespace CourseProject
     private void label1_Click_1(object sender, EventArgs e)
     {
 
+    }
+
+    private void sourceAccountComboBox_TextUpdate(object sender, EventArgs e)
+    {
+
+    }
+    private void updateTransferButton()
+    {
+      bool isEmpty = string.IsNullOrWhiteSpace(destinationAccountTextBox.Text)
+        || string.IsNullOrWhiteSpace(amountTextBox.Text);
+      transferFundsButton.Enabled = !isEmpty;
+    }
+
+    private void updateCreateAccountButton()
+    {
+      bool isEmpty = string.IsNullOrWhiteSpace(interestTextBox.Text);
+      openBankAccountButton.Enabled = !isEmpty;
+    }
+
+    private void destinationAccountTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateTransferButton();
+    }
+
+    private void amountTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateTransferButton();
+    }
+
+    private void interestTextBox_TextChanged(object sender, EventArgs e)
+    {
+      updateCreateAccountButton();
     }
   }
 }
