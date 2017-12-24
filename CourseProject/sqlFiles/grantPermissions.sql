@@ -34,3 +34,5 @@ GRANT EXECUTE ON dbo.SelectClientInformation TO db_client;
 
 GRANT EXECUTE ON dbo.SelectClients TO db_manager;
 GRANT EXECUTE ON dbo.UpdateClient TO db_manager;
+
+GRANT EXECUTE ON dbo.UpdateEmployee TO db_hr;

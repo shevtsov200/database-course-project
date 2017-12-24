@@ -68,11 +68,11 @@
       // 
       // pageControl
       // 
-      this.pageControl.Controls.Add(this.openAccountPage);
       this.pageControl.Controls.Add(this.showAccounts);
       this.pageControl.Controls.Add(this.makeTransactionPage);
       this.pageControl.Controls.Add(this.historyPage);
       this.pageControl.Controls.Add(this.LeaveFeedback);
+      this.pageControl.Controls.Add(this.openAccountPage);
       this.pageControl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pageControl.Location = new System.Drawing.Point(0, 0);
       this.pageControl.Name = "pageControl";

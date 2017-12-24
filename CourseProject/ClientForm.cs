@@ -26,6 +26,10 @@ namespace CourseProject
       historyGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
       updateCreateAccountButton();
       updateTransferButton();
+
+      Program.connectionQuery.OpenConnection();
+      accountsGrid.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccounts");
+      Program.connectionQuery.CloseConnection();
     }
 
     private void showAccounts_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,26 +37,23 @@ namespace CourseProject
       switch ((sender as TabControl).SelectedIndex)
       {
         case 0:
-          updateCreateAccountButton();
-          break;
-        case 1:
           Program.connectionQuery.OpenConnection();
           accountsGrid.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccounts");
           Program.connectionQuery.CloseConnection();
           break;
-        case 2:
+        case 1:
           Program.connectionQuery.OpenConnection();
           sourceAccountComboBox.DataSource = Program.connectionQuery.DataSet("SelectUserBankAccountsNumbers");
           sourceAccountComboBox.ValueMember = "account_id";
           Program.connectionQuery.CloseConnection();
           updateTransferButton();
           break;
-        case 3:
+        case 2:
           Program.connectionQuery.OpenConnection();
           historyGrid.DataSource = Program.connectionQuery.DataSet("SelectUserTransactions");
           Program.connectionQuery.CloseConnection();
           break;
-        case 4:
+        case 3:
           ratingComboBox.DisplayMember = "Text";
           ratingComboBox.ValueMember = "Value";
 
@@ -72,6 +73,9 @@ namespace CourseProject
           managerComboBox.ValueMember = "employee_id";
           managerComboBox.DataSource = Program.connectionQuery.DataSet("SelectManagers");
           Program.connectionQuery.CloseConnection();
+          break;
+        case 4:
+          updateCreateAccountButton();
           break;
       }
     }

@@ -369,7 +369,7 @@ BEGIN
 	FROM Clients
 	WHERE client_id = @ClientId
 END
-GO
+/*GO
 ALTER PROCEDURE SelectEmployeeInformation
 (
 	@EmployeeId integer
@@ -379,7 +379,7 @@ BEGIN
 	SELECT *
 	FROM Employees
 	WHERE employee_id = @EmployeeId
-END
+END*/
 GO
 ALTER PROCEDURE SelectClients
 AS
@@ -388,7 +388,7 @@ BEGIN
 	FROM Clients
 END
 GO
-CREATE PROCEDURE UpdateClient
+ALTER PROCEDURE UpdateClient
 (
 	@ClientId int,
 	@ClientName nvarchar(40),
@@ -411,8 +411,44 @@ Begin
 		client_password = @Password
 	WHERE client_id = @ClientId
 END
-	/*INSERT INTO Clients (name, city_id, client_address, passport_number, 
-		phone_number, username, client_password) 
-	VALUES (@ClientName, @ClientCityId, @ClientAddress, @PassportNumber, 
-		@PhoneNumber, @UserName, @Password)
-	EXEC RegisterClient @UserName, @Password*/
+GO
+ALTER PROCEDURE selectEmployeeInformation
+(
+	@EmployeeId integer
+)
+AS
+BEGIN
+	SELECT Employees.name, salary, Employees.bank_id, passport_number, phone_number, employee_address,
+		employee_password, position_id, Banks.city_id, username
+	FROM Employees
+	JOIN Banks ON Banks.bank_id = Employees.bank_id
+	WHERE employee_id = @EmployeeId
+END
+GO
+ALTER PROCEDURE UpdateEmployee
+(
+	@EmployeeId Integer,
+	@EmployeeName nvarchar(40),
+	@BankId integer,
+	@EmployeeAddress nvarchar(80),
+	@Salary decimal(18,4),
+	@PassportNumber nvarchar(25),
+	@PhoneNumber varchar(20),
+	@UserName varchar(20),
+	@Password varchar(20),
+	@PositionId integer
+)
+As
+Begin
+	UPDATE Employees
+	SET name = @EmployeeName,
+		employee_address = @EmployeeAddress,
+		passport_number = @PassportNumber,
+		phone_number = @PhoneNumber,
+		username = @UserName,
+		employee_password = @Password,
+		salary = @Salary,
+		position_id = @PositionId
+	WHERE employee_id = @EmployeeId
+End
+GO

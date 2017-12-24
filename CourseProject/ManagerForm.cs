@@ -199,8 +199,8 @@ namespace CourseProject
       Program.connectionQuery.OpenConnection();
       SqlParameter[] parameterList =
       {
-            new SqlParameter() {ParameterName =  "@ClientId", SqlDbType = SqlDbType.Int, Value = updateNameComboBox.SelectedValue}
-          };
+        new SqlParameter() {ParameterName =  "@ClientId", SqlDbType = SqlDbType.Int, Value = updateNameComboBox.SelectedValue}
+      };
 
       SqlDataReader reader = Program.connectionQuery.DataReader("SelectClientInformation", parameterList);
       if (reader.Read())
